@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".home">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <RelativeLayout
+            android:id="@+id/topLay"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/statusBar"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="61dp"
+                app:cardElevation="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentTop="true"
+                app:cardCornerRadius="10dp">
+
+                <EditText
+                    android:id="@+id/editTextSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/search_background"
+                    android:paddingStart="16dp"
+                    android:hint="পছন্দের বই খুজুন"
+                    android:textColorHint="#555353"
+                    android:paddingEnd="16dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:drawableStart="@drawable/search"
+                    android:drawablePadding="8dp" />
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/drawer"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="7dp"
+                android:padding="9dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/cart2" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/homeradious" />
+
+                <androidx.cardview.widget.CardView
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="3dp"
+                    app:cardElevation="2dp"
+                    app:cardCornerRadius="9dp">
+
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/image_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:iss_auto_cycle="true"
+                        app:iss_period="2000"
+                        app:iss_delay="3000"
+                        app:iss_text_align="CENTER"
+                        app:iss_placeholder="@drawable/load2"
+                        app:iss_error_image="@drawable/load2"
+                        app:iss_selected_dot="@drawable/default_selected_dot"
+                        app:iss_unselected_dot="@drawable/default_unselected_dot" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:visibility="gone"
+                android:layout_height="140dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="140dp"
+                            android:layout_height="50dp"
+                            app:cardCornerRadius="7dp"
+                            android:layout_margin="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/scifi"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="সাই-ফাই"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="#0C0C0C"
+                                    android:fontFamily="@font/hind3"
+                                    android:textStyle="normal"
+                                    android:textSize="16dp" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Repeat CardViews for other categories -->
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Other content -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="আজকের পাঠক চয়েজ"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/hind"
+                    android:textSize="17dp"
+                    android:textColor="#1B1B1B" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/book2"
+                            android:scaleType="fitXY" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="নরওয়েজেরিয়ান উড"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/hind"
+                            android:textColor="#E90A0F27"
+                            android:paddingLeft="15dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="হারুকি মুরাকামি"
+                            android:textSize="16dp"
+                            android:textStyle="normal"
+                            android:fontFamily="@font/hind"
+                            android:textColor="#0A0F27"
+                            android:paddingLeft="15dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="⭐⭐⭐⭐⭐ (5)"
+                            android:textSize="17dp"
+                            android:fontFamily="@font/hind"
+                            android:textColor="#0A0F27"
+                            android:paddingLeft="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="৩২ ৳"
+                                android:textSize="18dp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/hind"
+                                android:textColor="#0A0F27"
+                                android:paddingLeft="15dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="[ $0.33 ]"
+                                android:textSize="15dp"
+                                android:textStyle="normal"
+                                android:fontFamily="@font/hind"
+                                android:textColor="#0A0F27"
+                                android:paddingLeft="15dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="অন্যান্য"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/hind"
+                    android:textColor="#0A0F27" />
+            </RelativeLayout>
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:numColumns="3"
+                android:nextFocusUp="@color/statusBar"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/gridView" />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_height="40dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/hind"
+                    android:text="হরর"
+                    android:textColor="#232637"
+                    android:textSize="19dp"
+                    android:textStyle="normal" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    app:cardBackgroundColor="#F5F6F8"
+                    android:layout_gravity="right">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="সব দেখুন"
+                        android:textStyle="normal"
+                        android:fontFamily="@font/hind"
+                        android:gravity="center"
+                        android:textSize="14dp"
+                        android:textColor="#232637"/>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="100dp"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/recyCcearView"/>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
