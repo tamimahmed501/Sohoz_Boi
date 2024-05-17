@@ -5,5 +5,8 @@
     <color name="statusBar">#08a34f</color>
     <color name="selected_color">#E9FF0B</color>
     <color name="unselected_color">#E8E8E8</color>
+    <color name="colorPrimaryDark">#006830</color>
+    <color name="colorPrimary">#0BC613</color>
+
 
 </resources>

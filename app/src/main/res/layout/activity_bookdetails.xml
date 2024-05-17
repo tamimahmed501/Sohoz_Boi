@@ -21,11 +21,11 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="8dp"
-            android:padding="5dp"
-            android:foreground="@drawable/circular_ripple"
-            android:src="@drawable/back"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:foreground="@drawable/circular_ripple"
+            android:padding="5dp"
+            android:src="@drawable/back" />
 
 
 
