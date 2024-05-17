@@ -34,12 +34,41 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="55dp"
             android:textColor="@color/white"
-            android:text="নওজেরিয়ান উড"
+            android:text="The Book of ART"
             android:gravity="center|left"
             android:textSize="18dp"/>
 
-        
+        <ImageView
+            android:id="@+id/addcart"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/circular_ripple"
+            android:padding="2dp"
+            android:src="@drawable/addcart" />
+
+
+
     </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
 
 
@@ -351,9 +380,75 @@
 
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textStyle="bold"
+            android:textColor="#353535"
+            android:fontFamily="@font/mavenpro"
+            android:textSize="15dp"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/readMoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Read more"
+            android:textColor="@android:color/holo_blue_light"
+            android:textStyle="bold"
+            android:layout_below="@id/textView"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:fontFamily="@font/mavenpro"
+            android:textSize="15dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:layout_height="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="এই লেখকের অন্যান্য বই"
+            android:textSize="16dp"
+            android:fontFamily="@font/hind"
+            android:textColor="#0A0F27" />
+    </RelativeLayout>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:numColumns="3"
+        android:nextFocusUp="@color/statusBar"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/gridView" />
 
 
 
 
 
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
