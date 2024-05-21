@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F1F1F1"
+    tools:context=".mybook">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/statusBar">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="My Book"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:fontFamily="@font/prantobold"/>
+
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:src="@drawable/menu"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/booklay"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:elevation="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/mybookradious"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/book2"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Paragraph Collection"
+                    android:paddingTop="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/statusBar"
+                    android:textSize="17dp"
+                    android:fontFamily="@font/parthoregular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="by Ashikur Rahman Naim"
+                    android:paddingTop="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#004A03"
+                    android:fontFamily="@font/timesnewroman"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Purchase on: 12 january 2027"
+                    android:paddingTop="10dp"
+                    android:textStyle="bold"
+                    android:textColor="#004A03"
+                    android:fontFamily="@font/timesnewroman"/>
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/tap"/>
+
+        </RelativeLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

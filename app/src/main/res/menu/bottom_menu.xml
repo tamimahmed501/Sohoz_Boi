@@ -8,8 +8,8 @@
 
         />
 
-    <item android:title="Best"
-        android:id="@+id/appointment"
+    <item android:title="My Book"
+        android:id="@+id/mybook"
         android:iconTintMode="src_atop"
         android:icon="@drawable/trend"
 
@@ -17,7 +17,7 @@
 
 
     <item android:title="Audiobook"
-        android:id="@+id/Audiobook"
+        android:id="@+id/audiobook"
         android:icon="@drawable/audiobook"
 
         />
@@ -25,7 +25,7 @@
 
 
     <item android:title="Author"
-        android:id="@+id/Author"
+        android:id="@+id/author"
         android:icon="@drawable/author"
 
         />
@@ -35,7 +35,7 @@
 
 
     <item android:title="Profile"
-        android:id="@+id/user"
+        android:id="@+id/profile"
         android:icon="@drawable/user"
 
         />

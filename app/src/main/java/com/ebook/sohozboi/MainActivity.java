@@ -84,28 +84,28 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
               int i = item.getItemId();
-                if (i==0) {
+                if (i==R.id.home) {
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fm.beginTransaction();
                     fragmentTransaction.replace(R.id.frame, new home());
                     fragmentTransaction.commit();
 
-                } else if (i==1) {
+                } else if (i==R.id.mybook) {
                     FragmentManager fmx = getSupportFragmentManager();
                     FragmentTransaction fragmentTransactionx = fmx.beginTransaction();
-                    //fragmentTransactionx.replace(R.id.frame, new appointment());
+                    fragmentTransactionx.replace(R.id.frame, new mybook());
                     fragmentTransactionx.commit();
-                } else if (i==2) {
+                } else if (i==R.id.audiobook) {
                     FragmentManager fmy = getSupportFragmentManager();
                     FragmentTransaction fragmentTransactiony = fmy.beginTransaction();
                     //fragmentTransactiony.replace(R.id.frame, new internet()); // Assuming there is a dashboard fragment class
                     fragmentTransactiony.commit();
-                } else if (i==3) {
+                } else if (i==R.id.author) {
                     FragmentManager fmy = getSupportFragmentManager();
                     FragmentTransaction fragmentTransactiony = fmy.beginTransaction();
                     //fragmentTransactiony.replace(R.id.frame, new notification()); // Assuming there is a dashboard fragment class
                     fragmentTransactiony.commit();
-                }else if (i==4) {
+                }else if (i==R.id.profile) {
                     FragmentManager fmy = getSupportFragmentManager();
                     FragmentTransaction fragmentTransactiony = fmy.beginTransaction();
                     //fragmentTransactiony.replace(R.id.frame, new user()); // Assuming there is a dashboard fragment class
