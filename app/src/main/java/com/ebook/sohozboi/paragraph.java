@@ -162,6 +162,8 @@ public class paragraph extends AppCompatActivity implements androidx.appcompat.w
 
             String title1 = hashMap.get("title");
             String content = hashMap.get("content");
+            String meaning = hashMap.get("meaning");
+
             holder.title.setText(title1);
 
             holder.mainlay.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +172,8 @@ public class paragraph extends AppCompatActivity implements androidx.appcompat.w
 
                     readparagraph.TITLE=title1;
                     readparagraph.CONTENT=content;
+                    readparagraph.MEANING=meaning;
+
                     startActivity(new Intent(paragraph.this, readparagraph.class));
                     Animatoo.animateSwipeLeft(paragraph.this);
 

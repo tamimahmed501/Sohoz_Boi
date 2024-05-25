@@ -17,7 +17,9 @@ public class readparagraph extends AppCompatActivity {
 
     public static String TITLE = "";
     public static String CONTENT = "";
-    TextView title, content;
+    public static String MEANING = "";
+
+    TextView title, content, meaning;
     ImageView back;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,18 +30,18 @@ public class readparagraph extends AppCompatActivity {
         title = findViewById(R.id.title);
         content = findViewById(R.id.content);
         back = findViewById(R.id.back);
-
+        meaning = findViewById(R.id.meaning);
 
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             title.setText(Html.fromHtml(TITLE, Html.FROM_HTML_MODE_COMPACT));
             content.setText(Html.fromHtml(CONTENT, Html.FROM_HTML_MODE_COMPACT));
-
+            meaning.setText(Html.fromHtml(MEANING, Html.FROM_HTML_MODE_COMPACT));
         } else {
             title.setText(Html.fromHtml(TITLE));
             content.setText(Html.fromHtml(CONTENT));
-
+            meaning.setText(Html.fromHtml(MEANING));
         }
 
 

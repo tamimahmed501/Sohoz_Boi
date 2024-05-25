@@ -58,15 +58,37 @@
             <TextView
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:fontFamily="@font/prantobold"
-                android:textStyle="bold"
-                android:gravity="center"
+                android:fontFamily="@font/hind"
+                android:gravity="start"
+                android:justificationMode="inter_word"
                 android:text="Load Shedding"
-                android:textColor="#373737"
+                android:textColor="#292929"
                 android:textSize="18dp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/hind"
+                android:gravity="center"
+                android:text="বাংলা অর্থ"
+                android:textColor="#121212"
+                android:textStyle="bold"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/meaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/hind"
+                android:gravity="start"
+            android:justificationMode="inter_word"
+            android:text="Load Shedding"
+            android:textColor="#131313"
+            android:textSize="18dp" />
 
 
         </LinearLayout>
