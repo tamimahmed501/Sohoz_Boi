@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/card"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:elevation="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/mybookradious"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/bookcover"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/book2"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:id="@+id/bookname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Paragraph Collection"
+                    android:textStyle="bold"
+                    android:textColor="#232323"
+                    android:textSize="17dp"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/changa"/>
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="by Ashikur Rahman Naim"
+                    android:textStyle="bold"
+                    android:textColor="#232323"
+                    android:fontFamily="@font/changa"/>
+
+                <TextView
+                    android:id="@+id/purchasedate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Purchase on: 12 january 2027"
+                    android:paddingTop="1dp"
+                    android:textStyle="bold"
+                    android:textColor="#232323"
+                    android:fontFamily="@font/changa"/>
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/tap"/>
+
+        </RelativeLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

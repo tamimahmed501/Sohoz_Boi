@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".home">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -53,7 +54,7 @@
                 android:layout_marginTop="7dp"
                 android:padding="9dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/cart2" />
+                android:src="@drawable/cart" />
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

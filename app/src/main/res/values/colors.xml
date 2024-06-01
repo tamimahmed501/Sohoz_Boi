@@ -8,5 +8,12 @@
     <color name="colorPrimaryDark">#006830</color>
     <color name="colorPrimary">#0BC613</color>
 
+    <color name="yellow">#FCD434</color>
+    <color name="shadowWhite">#D3D4DB</color>
+    <color name="textColor">#2C2C2C</color>
+    <color name="yellowText">#FBBD03</color>
 
+    <color name="homepage">#F4F4F4</color>
+    <color name="valid">#04BC0C</color>
+    <color name="invalid">#D51717</color>
 </resources>

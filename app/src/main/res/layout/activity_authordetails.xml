@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".authordetails">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/statusBar"
+        android:layout_height="45dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/hind"
+            android:gravity="center"
+            android:text="সাদাত হোসাইন"
+            android:textColor="@color/white"
+            android:textSize="19dp" />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="4dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/share"
+            android:padding="8dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="9dp"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/sadat"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#90070707"/>
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            app:civ_border_color="@color/statusBar"
+            app:civ_border_width="3dp"
+            android:src="@drawable/sadat"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"/>
+
+
+
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="সাদাত হোসাইন"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/hind"
+            android:textStyle="bold"
+            android:layout_marginTop="140dp"/>
+
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:fontFamily="@font/hind3"
+        android:textColor="@color/textColor"
+        android:maxLines="3"
+        android:textStyle="bold"
+        android:padding="15dp"
+        android:text="সাদাত হোসাইন তাঁর জন্ম ১৯৮৪ সালের ২১ মে, মাদারীপুর জেলার, কালকিনি থানার কয়ারিয়া গ্রামে।তিনি মনে করেন, সিনেমা থেকে পেইন্টিং, আলোকচিত্র থেকে ভাস্কর্য, গান থেকে কবিতা- উপন্যাস-নাটক, সৃজনশীল এই প্রতিটি মাধ্যমই মূলত গল্প বলে। গল্প বলার সেই আগ্রহ থেকেই একের পর এক লিখেছেন- আরশিনগর, অন্দরমহল, মানবজনম, নিঃসঙ্গ নক্ষত্র, নির্বাসন, ছদ্মবেশ, মেঘেদের দিন ও অর্ধবৃত্তের মতো তুমুল জনপ্রিয় উপন্যাস। ‘কাজল চোখের মেয়ে’, তোমাকে দেখার অসুখ’সহ দারুণ সব পাঠকপ্রিয় কবিতার বই।"
+        android:ellipsize="end"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#E4E4E4"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"
+        android:fontFamily="@font/hind3"
+        android:textColor="#707070"
+        android:textStyle="bold"
+        android:text="সাদাত হোসাইনের সকল বই"
+        android:gravity="center"
+        android:padding="10dp"/>
+
+
+
+
+
+</LinearLayout>

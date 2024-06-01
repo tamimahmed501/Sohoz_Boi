@@ -1,56 +1,28 @@
 package com.ebook.sohozboi;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.ebook.sohozboi.R;
-import com.ebook.sohozboi.home;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.messaging.FirebaseMessaging;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import me.ibrahimsn.lib.OnItemSelectedListener;
-import me.ibrahimsn.lib.SmoothBottomBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final int MY_REQUEST_CODE = 1 ;
 
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
 
-
-
     LinearLayout bottomlay;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -58,78 +30,102 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         frameLayout = findViewById(R.id.frame);
-
-
-
-
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frame, new home());
         fragmentTransaction.commit();
 
-
-
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment destinationFragment = null;
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-              int i = item.getItemId();
-                if (i==R.id.home) {
-                    FragmentManager fm = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.frame, new home());
-                    fragmentTransaction.commit();
+                // Get the index of the current fragment
+                int currentIndex = -1;
+                int destinationIndex = -1;
+                int i = item.getItemId();
 
-                } else if (i==R.id.mybook) {
-                    FragmentManager fmx = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransactionx = fmx.beginTransaction();
-                    fragmentTransactionx.replace(R.id.frame, new mybook());
-                    fragmentTransactionx.commit();
-                } else if (i==R.id.audiobook) {
-                    FragmentManager fmy = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransactiony = fmy.beginTransaction();
-                    //fragmentTransactiony.replace(R.id.frame, new internet()); // Assuming there is a dashboard fragment class
-                    fragmentTransactiony.commit();
-                } else if (i==R.id.author) {
-                    FragmentManager fmy = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransactiony = fmy.beginTransaction();
-                    //fragmentTransactiony.replace(R.id.frame, new notification()); // Assuming there is a dashboard fragment class
-                    fragmentTransactiony.commit();
-                }else if (i==R.id.profile) {
-                    FragmentManager fmy = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransactiony = fmy.beginTransaction();
-                    //fragmentTransactiony.replace(R.id.frame, new user()); // Assuming there is a dashboard fragment class
-                    fragmentTransactiony.commit();
+                if (currentFragment instanceof home) {
+                    currentIndex = 0;
+                } else if (currentFragment instanceof mybook) {
+                    currentIndex = 1;
+                } else if (currentFragment instanceof myaudiobook) {
+                    currentIndex = 2;
+                } else if (currentFragment instanceof Author) {
+                    currentIndex = 3;
+                } else if (currentFragment instanceof profile) {
+                    currentIndex = 4;
                 }
 
+                if (i == R.id.home) {
+                    destinationFragment = new home();
+                    destinationIndex = 0;
+                } else if (i == R.id.mybook) {
+                    destinationFragment = new mybook();
+                    destinationIndex = 1;
+                } else if (i == R.id.audiobook) {
+                    destinationFragment = new myaudiobook();
+                    destinationIndex = 2;
+                } else if (i == R.id.author) {
+                    destinationFragment = new Author();
+                    destinationIndex = 3;
+                } else if (i == R.id.profile) {
+                    destinationFragment = new profile();
+                    destinationIndex = 4;
+                }
 
+                // Set the animation direction based on the comparison of indices
+                if (currentIndex < destinationIndex) {
+                    // Current fragment index is less than destination index, animate right to left
+                    fragmentTransaction.setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left, R.anim.enter_left_to_right, R.anim.exit_left_to_right);
+                } else {
+                    // Current fragment index is greater than or equal to destination index, animate left to right
+                    fragmentTransaction.setCustomAnimations(R.anim.enter_left_to_right, R.anim.exit_left_to_right, R.anim.enter_right_to_left, R.anim.exit_right_to_left);
+                }
 
+                if (destinationFragment != null) {
+                    fragmentTransaction.replace(R.id.frame, destinationFragment);
+                    fragmentTransaction.commit();
+                }
 
                 return true;
             }
         });
 
+        // Check for the flag in the Intent
+        if (getIntent().getBooleanExtra("NAVIGATE_TO_PROFILE", false)) {
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.frame, new profile());
+            fragmentTransaction.commit();
+            bottomNavigationView.setSelectedItemId(R.id.profile);
+        }
 
+        if (getIntent().getBooleanExtra("NAVIGATE_TO_MYBOOK", false)) {
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.frame, new mybook());
+            fragmentTransaction.commit();
+            bottomNavigationView.setSelectedItemId(R.id.mybook);
+        }
 
+        if (getIntent().getBooleanExtra("NAVIGATE_TO_AUTHOR", false)) {
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.frame, new Author());
+            fragmentTransaction.commit();
+            bottomNavigationView.setSelectedItemId(R.id.author);
+        }
 
-
-
-
-
-
-
+        if (getIntent().getBooleanExtra("NAVIGATE_TO_AUDIOBOOK", false)) {
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.frame, new myaudiobook());
+            fragmentTransaction.commit();
+            bottomNavigationView.setSelectedItemId(R.id.audiobook);
+        }
     }
-
 
     @SuppressLint("MissingSuperCall")
     @Override
@@ -151,23 +147,5 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("না", null)
                 .show();
-
     }
-
-    // Declare the launcher at the top of your Activity/Fragment:
-    // Declare the launcher at the top of your Activity/Fragment:
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    // FCM SDK (and your app) can post notifications.
-                } else {
-                    // TODO: Inform user that that your app will not show notifications.
-                }
-            });
-
-
-
-
-
 }
-

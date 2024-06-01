@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_margin="15dp"
         app:cardCornerRadius="7dp"
-        app:cardBackgroundColor="@color/statusBar">
+        app:cardBackgroundColor="#07B556">
 
 
 
@@ -34,14 +34,15 @@
                 app:lottie_autoPlay="true"
                 android:scaleType="centerCrop"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/load" />
+                app:lottie_rawRes="@raw/bookload2" />
 
 
             <TextView
+                android:id="@+id/status"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="দয়া করে অপেক্ষা করুন"
+                android:text="Please wait a moment"
                 android:gravity="center|left"
                 android:textStyle="bold"
                 android:textSize="18dp"

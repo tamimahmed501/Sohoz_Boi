@@ -1,26 +1,20 @@
 package com.ebook.sohozboi;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -200,9 +194,6 @@ public class bookdetails extends AppCompatActivity {
             TextView price,name,author;
             CardView card;
             ImageView images;
-
-
-
 
 
             price = viewx.findViewById(R.id.price);
