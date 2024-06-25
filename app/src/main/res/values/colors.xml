@@ -16,4 +16,13 @@
     <color name="homepage">#F4F4F4</color>
     <color name="valid">#04BC0C</color>
     <color name="invalid">#D51717</color>
+
+
+
+
+
+    <color name="darkbg">#494949</color>
+    <color name="darkbg2">#1C1C1C</color>
+    <color name="whitebg2">#F6E9D7</color>
+
 </resources>

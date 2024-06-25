@@ -1,28 +1,36 @@
 package com.ebook.sohozboi;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.util.FitPolicy;
+import com.tom_roush.pdfbox.android.PDFBoxResourceLoader;
+import com.tom_roush.pdfbox.pdmodel.PDDocument;
+import com.tom_roush.pdfbox.text.PDFTextStripper;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,40 +41,188 @@ import java.net.URL;
 
 public class pdfread extends AppCompatActivity {
 
-    private static final String PDF_URL = "https://firebasestorage.googleapis.com/v0/b/my-reader-2-513d8.appspot.com/o/E-book.pdf?alt=media&token=41405295-d903-4508-a5b8-48fa1707465c";
+    private static final String PDF_URL = "https://firebasestorage.googleapis.com/v0/b/druto-pay.appspot.com/o/%E0%A6%9A%E0%A6%B0%20%E0%A6%95%E0%A7%81%E0%A6%95%E0%A6%B0%E0%A6%BF%20%E0%A6%AE%E0%A7%81%E0%A6%95%E0%A6%B0%E0%A6%BF.pdf?alt=media&token=5809398a-95a0-4a3a-802b-2f66e7e0824f";
     private static final String PDF_FILENAME = "downloaded_pdf.pdf";
+    private static final String PREF_NAME = "MyPrefs";
 
     private SeekBar textSizeSeekBar;
-    private PDFView pdfView;
-    private TextView pageNumberView;
     private ProgressBar progressBar;
     private TextView progressPercentage;
     private AlertDialog progressDialog;
-    private RetrievePDFStream retrievePDFStream;
-    private DatabaseHelper dbHelper;
+    private ExtractAndDisplayTextTask extractAndDisplayTextTask;
     private String savedPdfPath;
-    private boolean isNightMode = false;
-    private Switch nightModeSwitch;
+    private TextView extractedTextView;
 
+    LinearLayout setting;
+
+    private boolean isPdfSaved = false;
+
+    private byte[] pdfData;
+
+    RelativeLayout toplayout, bottomlayout;
+    ScrollView scroolview;
+    ImageView settingsclick;
+
+    private SeekBar brightnessSeekBar;
+    private ContentResolver contentResolver;
+    TextView whitebg, whitebg2, darkbg, darkbg2;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfread);
 
-        pdfView = findViewById(R.id.pdfView);
-        pageNumberView = findViewById(R.id.pageNumberView);
-        nightModeSwitch = findViewById(R.id.nightModeSwitch);
+        PDFBoxResourceLoader.init(getApplicationContext());
+
         textSizeSeekBar = findViewById(R.id.textSizeSeekBar);
+        extractedTextView = findViewById(R.id.extractedTextView);
+        toplayout = findViewById(R.id.toplayout);
+        bottomlayout = findViewById(R.id.bottomlayout);
+        scroolview = findViewById(R.id.scroolView);
+        setting = findViewById(R.id.setting);
+        settingsclick = findViewById(R.id.settingsclick);
 
-        dbHelper = new DatabaseHelper(this);
 
-        savedPdfPath = dbHelper.getPDFPath(PDF_URL);
+        whitebg = findViewById(R.id.whitebg);
+        whitebg2 = findViewById(R.id.whitebg2);
+        darkbg = findViewById(R.id.darkbg);
+        darkbg2 = findViewById(R.id.darkbg2);
+
+
+
+        contentResolver = getContentResolver();
+        brightnessSeekBar = findViewById(R.id.brightnessSeekBar);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // Check for write settings permission
+        if (!Settings.System.canWrite(this)) {
+            Toast.makeText(this, "Please grant write settings permission", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivityForResult(intent, 0);
+        } else {
+            initializeSeekBar();
+        }
+
+
+
+
+        whitebg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                extractedTextView.setBackgroundColor(getColor(R.color.white));
+
+
+            }
+        });
+
+
+
+        whitebg2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                extractedTextView.setBackgroundColor(getColor(R.color.whitebg2));
+
+
+            }
+        });
+
+
+        darkbg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                extractedTextView.setBackgroundColor(getColor(R.color.darkbg));
+
+
+            }
+        });
+
+        darkbg2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                extractedTextView.setBackgroundColor(getColor(R.color.darkbg2));
+
+
+            }
+        });
+
+
+
+        settingsclick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (setting.getVisibility()==View.VISIBLE){
+
+                    setting.setVisibility(View.GONE);
+
+                } else {
+
+                    setting.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        });
+
+
+        savedPdfPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/" + PDF_FILENAME;
+
+        File pdfFile = new File(savedPdfPath);
+        if (pdfFile.exists()) {
+            isPdfSaved = true;
+            //extractAndDisplayText();
+            SharedPreferences sharedPreferencesx = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+            String pdftext = sharedPreferencesx.getString(PDF_URL, "");
+
+            extractedTextView.setText(pdftext);
+        } else {
+
+            showProgressDialog("Downloading PDF");
+            new DownloadPDFTask().execute(PDF_URL);
+
+
+        }
+
+
+
+
+
+
+        extractedTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (toplayout.getVisibility() == View.VISIBLE) {
+                    toplayout.setVisibility(View.GONE);
+                    bottomlayout.setVisibility(View.GONE);
+                } else {
+                    toplayout.setVisibility(View.VISIBLE);
+                    bottomlayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         textSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Update PDF text size based on seek bar progress
-                updateTextSize(progress);
+                float textSize = 12 + (float) progress / 2;
+                extractedTextView.setTextSize(textSize);
             }
 
             @Override
@@ -76,54 +232,167 @@ public class pdfread extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        nightModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isNightMode = isChecked;
-                if (savedPdfPath != null) {
-                    loadPDF(savedPdfPath, textSizeSeekBar.getProgress());
-                }
-            }
-        });
 
-        if (savedPdfPath != null) {
-            float initialTextSize = 12; // Initial text size, adjust as needed
-            loadPDF(savedPdfPath, initialTextSize);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pdfData != null && !isPdfSaved) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Save PDF")
+                    .setMessage("Do you want to save the PDF locally?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            savePdfLocally();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            pdfread.super.onBackPressed();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         } else {
-            showDownloadDialog();
+            super.onBackPressed();
         }
     }
 
-    private void updateTextSize(int progress) {
-        // Calculate the text size based on the progress
-        float textSize = 12 + (float) progress / 2; // Example calculation, adjust as needed
-
-        // Load PDF with the updated text size
-        loadPDF(savedPdfPath, textSize);
+    private void savePdfLocally() {
+        try {
+            File file = new File(savedPdfPath);
+            try (FileOutputStream output = new FileOutputStream(file)) {
+                output.write(pdfData);
+                isPdfSaved = true;
+                Toast.makeText(this, "PDF saved locally", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.e("Save PDF", "Error saving PDF", e);
+        }
     }
 
-    private void showDownloadDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Download PDF")
-                .setMessage("Do you want to download the PDF?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        showProgressDialog();
-                        retrievePDFStream = new RetrievePDFStream();
-                        retrievePDFStream.execute(PDF_URL);
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        onBackPressed();
-                    }
-                })
-                .show();
+    private void extractAndDisplayText() {
+        extractAndDisplayTextTask = new ExtractAndDisplayTextTask();
+        extractAndDisplayTextTask.execute();
     }
 
-    private void showProgressDialog() {
+    private class DownloadPDFTask extends AsyncTask<String, Integer, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+            String pdfUrl = urls[0];
+            try {
+                URL url = new URL(pdfUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    return false;
+                }
+
+                int fileLength = connection.getContentLength();
+
+                InputStream input = connection.getInputStream();
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                long total = 0;
+                int bytesRead;
+                while ((bytesRead = input.read(buffer)) != -1) {
+                    total += bytesRead;
+                    if (fileLength > 0) {
+                        publishProgress((int) (total * 100 / fileLength));
+                    }
+                    output.write(buffer, 0, bytesRead);
+                }
+                input.close();
+                pdfData = output.toByteArray();
+                return true;
+            } catch (Exception e) {
+                Log.e("Download PDF", "Error downloading PDF", e);
+                return false;
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (progressBar != null) {
+                progressBar.setProgress(values[0]);
+                progressPercentage.setText(values[0] + "%");
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            progressDialog.dismiss();
+            if (result) {
+                extractAndDisplayText();
+            } else {
+                Toast.makeText(pdfread.this, "Failed to download PDF", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class ExtractAndDisplayTextTask extends AsyncTask<Void, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            showProgressDialog("Extracting Text");
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try (PDDocument pdfDocument = PDDocument.load(pdfData)) {
+                PDFTextStripper pdfStripper = new PDFTextStripper();
+                pdfStripper.setSortByPosition(true);
+
+                int totalPages = pdfDocument.getNumberOfPages();
+                StringBuilder extractedText = new StringBuilder();
+
+                for (int i = 1; i <= totalPages; i++) {
+                    pdfStripper.setStartPage(i);
+                    pdfStripper.setEndPage(i);
+                    extractedText.append(pdfStripper.getText(pdfDocument));
+                    publishProgress((int) ((i / (float) totalPages) * 100));
+                }
+
+                return extractedText.toString();
+            } catch (IOException e) {
+                Log.e("Text Extraction", "Error extracting text", e);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (progressBar != null && progressPercentage != null) {
+                progressBar.setProgress(values[0]);
+                progressPercentage.setText(values[0] + "%");
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String text) {
+            progressDialog.dismiss();
+            if (text != null) {
+                extractedTextView.setText(text);
+
+                SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString(PDF_URL, text);
+
+                editor.apply();
+
+
+            } else {
+                Toast.makeText(pdfread.this, "Failed to extract text", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void showProgressDialog(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Loading PDF");
+        builder.setTitle(title);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.progress_dialog, null);
@@ -135,7 +404,9 @@ public class pdfread extends AppCompatActivity {
         builder.setCancelable(false);
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                retrievePDFStream.cancel(true);
+                if (extractAndDisplayTextTask != null) {
+                    extractAndDisplayTextTask.cancel(true);
+                }
                 dialog.dismiss();
             }
         });
@@ -144,108 +415,48 @@ public class pdfread extends AppCompatActivity {
         progressDialog.show();
     }
 
-    private void loadPDF(String path, float textSize) {
-        File file = new File(path);
-        pdfView.fromFile(file)
-                .enableSwipe(true)
-                .swipeHorizontal(false)
-                .enableDoubletap(true)
-                .defaultPage(0)
-                .nightMode(isNightMode)
-                .onPageChange(new OnPageChangeListener() {
-                    @Override
-                    public void onPageChanged(int page, int pageCount) {
-                        pageNumberView.setText("Page: " + (page + 1) + " / " + pageCount);
-                    }
-                })
-                .pageFitPolicy(FitPolicy.BOTH)
-                .pageSnap(true)
-                .autoSpacing(true)
-                .pageFling(true)
-                .defaultPage(0)
-                .spacing(0)
-                .swipeHorizontal(false)
-                .pageSnap(true)
-                .autoSpacing(true)
-                .pageFling(true)
-                .enableAnnotationRendering(false)
-                .nightMode(isNightMode)
-                .enableAntialiasing(true)
-                .enableAnnotationRendering(false)
-                .enableDoubletap(true)
-                .defaultPage(0)
-                .enableSwipe(true)
-                .load();
-    }
 
-    private void savePDFToLocal(ByteArrayInputStream inputStream) {
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), PDF_FILENAME);
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (Settings.System.canWrite(this)) {
+                initializeSeekBar();
+            } else {
+                Toast.makeText(this, "Permission not granted", Toast.LENGTH_LONG).show();
             }
-            dbHelper.insertPDF(PDF_URL, file.getAbsolutePath());
-            Toast.makeText(this, "PDF saved locally", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-            loadPDF(file.getAbsolutePath(), textSizeSeekBar.getProgress());
-        } catch (IOException e) {
-            Log.e("PDF Save", "Error saving PDF", e);
         }
     }
 
-    private class RetrievePDFStream extends AsyncTask<String, Integer, ByteArrayInputStream> {
+    private void initializeSeekBar() {
+        // Initialize SeekBar with current brightness
+        try {
+            int brightness = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS);
+            brightnessSeekBar.setProgress(brightness);
+        } catch (Settings.SettingNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        @Override
-        protected ByteArrayInputStream doInBackground(String... strings) {
-            ByteArrayInputStream byteArrayInputStream = null;
-            try {
-                URL url = new URL(strings[0]);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.connect();
-                int fileLength = urlConnection.getContentLength();
-
-                if (urlConnection.getResponseCode() == 200) {
-                    InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-                    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                    byte[] data = new byte[1024];
-                    int total = 0;
-                    int count;
-                    while ((count = inputStream.read(data, 0, 1024)) != -1) {
-                        total += count;
-                        buffer.write(data, 0, count);
-                        if (fileLength > 0) {
-                            publishProgress((int) (total * 100 / fileLength));
-                        }
-                    }
-                    byte[] pdfBytes = buffer.toByteArray();
-                    byteArrayInputStream = new ByteArrayInputStream(pdfBytes);
-                }
-            } catch (IOException e) {
-                Log.e("PDF Stream", "Error fetching PDF", e);
+        // Set listener for SeekBar
+        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // Change brightness
+                Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, progress);
             }
-            return byteArrayInputStream;
-        }
 
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-            progressBar.setProgress(progress[0]);
-            progressPercentage.setText(progress[0] + "%");
-        }
-
-        @Override
-        protected void onPostExecute(ByteArrayInputStream byteArrayInputStream) {
-            if (byteArrayInputStream != null) {
-                savePDFToLocal(byteArrayInputStream);
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
             }
-        }
 
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-            progressDialog.dismiss();
-        }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     }
 }

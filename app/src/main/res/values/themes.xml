@@ -8,7 +8,6 @@
 
     <style name="Theme.SohozBoi" parent="Base.Theme.SohozBoi" />
 
-
     <style name="BottomNavigationView.ActiveText" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/selected_color</item>
@@ -19,4 +18,10 @@
         <item name="android:textColor">@color/unselected_color</item>
     </style>
 
+    <!-- Theme for Specific Activity -->
+    <style name="AppTheme.BlackStatusBarAndNavBar" parent="Base.Theme.SohozBoi">
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- Light text for status bar -->
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
 </resources>

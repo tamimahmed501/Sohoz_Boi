@@ -287,7 +287,7 @@ public class home extends Fragment {
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getContext(), AudiobookActivity.class));
+                    startActivity(new Intent(getContext(), paragraph.class));
                 }
             });
 

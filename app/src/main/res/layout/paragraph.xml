@@ -37,10 +37,11 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/mavenpro"
+            android:fontFamily="@font/changa"
             android:textStyle="bold"
             android:gravity="center|left"
             android:paddingLeft="50dp"
+            android:maxLines="1"
             android:text="Load Shedding"
             android:textColor="@color/black"
             android:textSize="18dp" />
