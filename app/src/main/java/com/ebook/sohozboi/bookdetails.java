@@ -3,12 +3,14 @@ package com.ebook.sohozboi;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.ebook.sohozboi.databinding.ActivityBookdetailsBinding;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -30,10 +34,11 @@ import java.util.HashMap;
 
 public class bookdetails extends AppCompatActivity {
 
-    ImageView imageView;
+    ActivityBookdetailsBinding binding;
+
 
     private boolean isExpanded = false;
-    private TextView textView, readMoreTextView;
+
     private String fullText;
     private String shortText;
 
@@ -41,57 +46,114 @@ public class bookdetails extends AppCompatActivity {
     ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
 
     Myadapter myadapter;
-    GridView gridView;
 
+
+
+    public static String BOOKNAME = "";
+    public static String BOOKID = "";
+    public static String AUTHOR = "";
+    public static String AUTHORID = "";
+    public static String PUBLISHER = "";
+    public static String PUBLISHERID = "";
+    public static String PRICE = "";
+    public static String DOLLER = "";
+    public static String CATAGORY = "";
+    public static String CATAGORYID = "";
+    public static String TXTLINK = "";
+    public static String PDFLINK = "";
+    public static String READABIT = "";
+    public static String DESCRIPTION = "";
+    public static String VIEWS = "";
+    public static String BOOKTYPE = "";
+
+    public static Bitmap Mybitmap = null;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookdetails);
+        binding = ActivityBookdetailsBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        imageView = findViewById(R.id.back);
-        textView = findViewById(R.id.textView);
-        readMoreTextView = findViewById(R.id.readMoreTextView);
 
-
-        gridView = findViewById(R.id.gridView);
 
 
         myadapter = new Myadapter();
-        gridView.setAdapter(myadapter);
+        binding.gridView.setAdapter(myadapter);
+
+
+
+
+        binding.bookname.setText(BOOKNAME);
+        binding.booktitle.setText(BOOKNAME);
+        binding.doller.setText(DOLLER+" $");
+        binding.author.setText(AUTHOR);
+        binding.category.setText(CATAGORY);
+
+
+        if (Mybitmap!=null) binding.images.setImageBitmap(Mybitmap);
+
+
+        binding.readabittext.setVisibility(View.GONE);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.readabittext.setText(Html.fromHtml(READABIT, Html.FROM_HTML_MODE_COMPACT));
+
+        } else {
+            binding.readabittext.setText(Html.fromHtml(READABIT));
+
+        }
+
+
+        if (PRICE.contains("0")){
+
+
+            binding.price.setText("ফ্রী বই");
+            binding.read.setText("বইটি পড়ূন");
+
+        } else {
+
+            binding.price.setText(PRICE+" ৳");
+
+        }
+
+
+
+
+
+        binding.readabit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (binding.readabittext.getVisibility()==View.VISIBLE){
+
+                    binding.readabittext.setVisibility(View.GONE);
+                    binding.abit.setText("আংশিক পড়ুন");
+
+                } else {
+
+                    binding.readabittext.setVisibility(View.VISIBLE);
+                    binding.abit.setText("বন্ধ করুন");
+                }
+
+            }
+        });
+
 
         newBooks();
 
 
-        // Assume fullText is your long text
-        fullText = "Traffic jam is the situation when vehicles are stopped completely for some time period on the roads. Also, vehicles have to wait for a long time to move out of the jam. Sometimes it becomes like congestion in traffic. This happens in transport network due to the increasing vehicles and overuse of roads. Often it is due to slow speed, longer trip time and increased queues of vehicles. Therefore, traffic jam is becoming a major issue mostly in all cities.";
 
-        // Create the short text by taking the first 100 characters
-        shortText = fullText.substring(0, Math.min(fullText.length(), 100)) + "...";
 
-        // Set the initial text to shortText
-        textView.setText(shortText);
-
-        textView.post(new Runnable() {
-            @Override
-            public void run() {
-                // Ensure the layout is ready
-                readMoreTextView.setVisibility(View.VISIBLE);
-            }
-        });
-
-        readMoreTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleText();
-            }
-        });
-
-        imageView.setOnClickListener(new View.OnClickListener() {
+        binding.images.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
+                Animatoo.animateSwipeRight(bookdetails.this);
             }
         });
 
@@ -248,14 +310,10 @@ public class bookdetails extends AppCompatActivity {
     }
 
 
-    private void toggleText() {
-        if (isExpanded) {
-            textView.setText(shortText);
-            readMoreTextView.setText("Read more");
-        } else {
-            textView.setText(fullText);
-            readMoreTextView.setText("See less");
-        }
-        isExpanded = !isExpanded;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Animatoo.animateSwipeRight(bookdetails.this);
     }
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="#F1F1F1"
     tools:context=".home">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -262,28 +262,39 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="6dp"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:text="অন্যান্য"
+                    android:text="একাডেমিক"
                     android:textSize="18dp"
                     android:fontFamily="@font/hind"
                     android:textColor="#0A0F27" />
             </RelativeLayout>
 
-            <GridView
+
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/validate1" />
+
+
+            <com.ebook.sohozboi.ExpandableHeightGridView
+                android:id="@+id/gridView"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:numColumns="3"
                 android:nextFocusUp="@color/statusBar"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/gridView" />
+                android:layout_marginRight="10dp" />
 
 
 

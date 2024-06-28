@@ -30,6 +30,7 @@
 
 
         <TextView
+            android:id="@+id/booktitle"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="55dp"
@@ -105,18 +106,6 @@
 
 
 
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/priceradious"
-                    android:text="ফ্রি বই"
-                    android:fontFamily="@font/rumaysa"
-                    android:textSize="11dp"
-                    android:gravity="center"
-                    android:textColor="@color/white"/>
 
 
             </RelativeLayout>
@@ -137,16 +126,17 @@
 
 
             <TextView
+                android:id="@+id/bookname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="The Book Of ART"
                 android:textStyle="bold"
                 android:textSize="19dp"
-                android:paddingTop="20dp"
+                android:paddingTop="18dp"
                 android:paddingLeft="15dp"
                 android:maxLines="2"
                 android:textColor="#A8000000"
-                android:fontFamily="serif"/>
+                android:fontFamily="@font/hind"/>
 
 
             <LinearLayout
@@ -167,6 +157,7 @@
 
 
                 <TextView
+                    android:id="@+id/author"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Samuel Bridman"
@@ -192,6 +183,7 @@
                 android:layout_marginTop="15dp">
 
                 <TextView
+                    android:id="@+id/category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="উপন্যাস"
@@ -227,6 +219,7 @@
                         android:dividerPadding="8dp">
 
                         <TextView
+                            android:id="@+id/price"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="24 ৳"
@@ -239,6 +232,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/doller"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="0.44 $"
@@ -251,6 +245,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/page"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="122 পৃষ্ঠা"
@@ -288,6 +283,8 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/readabit"
+            android:foreground="?attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             app:cardCornerRadius="10dp"
@@ -313,6 +310,7 @@
 
 
                 <TextView
+                    android:id="@+id/abit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="আংশিক পড়ুন"
@@ -333,7 +331,10 @@
 
 
 
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/buy"
+            android:foreground="?attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             app:cardCornerRadius="10dp"
@@ -361,6 +362,7 @@
 
 
                 <TextView
+                    android:id="@+id/read"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="ক্রয় করুন"
@@ -389,7 +391,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/readabittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="3dp"
@@ -400,19 +402,6 @@
             android:textSize="15dp"
             android:ellipsize="end" />
 
-        <TextView
-            android:id="@+id/readMoreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Read more"
-            android:textColor="@android:color/holo_blue_light"
-            android:textStyle="bold"
-            android:layout_below="@id/textView"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:fontFamily="@font/mavenpro"
-            android:textSize="15dp"
-            android:visibility="gone" />
     </RelativeLayout>
 
 

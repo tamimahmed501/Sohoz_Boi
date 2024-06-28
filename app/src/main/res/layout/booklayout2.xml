@@ -33,18 +33,6 @@
 
 
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/priceradious"
-                android:text="ফ্রি বই"
-                android:fontFamily="@font/rumaysa"
-                android:textSize="11dp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
 
 
         </RelativeLayout>
@@ -64,27 +52,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="The Book of ART"
-        android:textStyle="bold"
-        android:fontFamily="@font/mavenpro"
+        android:fontFamily="@font/hind"
         android:layout_gravity="left"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:paddingLeft="2dp"
-        android:maxLines="1"
-        android:textColor="#232637"/>
+        android:textStyle="bold"
+        android:textColor="#262627"/>
 
 
     <TextView
         android:id="@+id/author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Robert Downy"
-        android:textStyle="normal"
-        android:fontFamily="@font/mavenpro"
+        android:text="The Book of ART"
+        android:fontFamily="@font/hind"
         android:layout_gravity="left"
         android:textSize="13dp"
         android:paddingLeft="2dp"
-        android:maxLines="1"
-        android:layout_marginBottom="10dp"
-        android:textColor="#A4232637"/>
+        android:textColor="#262627"/>
+
+
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="ফ্রি বই"
+        android:fontFamily="@font/changa"
+        android:textSize="12dp"
+        android:gravity="center|left"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
 
 </LinearLayout>
