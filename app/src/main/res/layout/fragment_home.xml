@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F1F1F1"
+    android:background="@color/white"
     tools:context=".home">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -162,7 +162,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="190dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -177,6 +177,8 @@
                     android:textColor="#1B1B1B" />
 
                 <LinearLayout
+                    android:id="@+id/paragraph"
+                    android:foreground="?attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="10dp"
@@ -188,11 +190,24 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <ImageView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/book2"
-                            android:scaleType="fitXY" />
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/paragraph2"
+                                android:scaleType="fitXY" />
+
+
+
+                        </androidx.cardview.widget.CardView>
+
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -203,7 +218,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="নরওয়েজেরিয়ান উড"
+                            android:text="Easy Paragraph Writting"
                             android:textSize="18dp"
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
@@ -214,7 +229,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="হারুকি মুরাকামি"
+                            android:text="Ashikur Rahman Naim"
                             android:textSize="16dp"
                             android:textStyle="normal"
                             android:fontFamily="@font/hind"
@@ -238,7 +253,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="৩২ ৳"
+                                android:text="৪৯ ৳"
                                 android:textSize="18dp"
                                 android:textStyle="bold"
                                 android:fontFamily="@font/hind"
@@ -248,7 +263,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="[ $0.33 ]"
+                                android:text="[ $0.99 ]"
                                 android:textSize="15dp"
                                 android:textStyle="normal"
                                 android:fontFamily="@font/hind"
@@ -269,7 +284,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:text="একাডেমিক"
+                    android:text="একাডেমিক বই"
                     android:textSize="18dp"
                     android:fontFamily="@font/hind"
                     android:textColor="#0A0F27" />
@@ -281,10 +296,11 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="290dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/validate1" />
+                app:lottie_speed="2"
+                app:lottie_rawRes="@raw/book1" />
 
 
             <com.ebook.sohozboi.ExpandableHeightGridView
@@ -294,78 +310,8 @@
                 android:numColumns="3"
                 android:nextFocusUp="@color/statusBar"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="100dp"
                 android:layout_marginRight="10dp" />
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="6dp"
-                android:layout_height="40dp">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/hind"
-                    android:text="হরর"
-                    android:textColor="#232637"
-                    android:textSize="19dp"
-                    android:textStyle="normal" />
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="80dp"
-                    android:layout_height="32dp"
-                    app:cardCornerRadius="5dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="10dp"
-                    app:cardBackgroundColor="#F5F6F8"
-                    android:layout_gravity="right">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="সব দেখুন"
-                        android:textStyle="normal"
-                        android:fontFamily="@font/hind"
-                        android:gravity="center"
-                        android:textSize="14dp"
-                        android:textColor="#232637"/>
-
-
-                </androidx.cardview.widget.CardView>
-
-
-            </RelativeLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="100dp"
-                    android:paddingLeft="5dp"
-                    android:id="@+id/recyCcearView"/>
-
-
-
-
-            </LinearLayout>
 
 
 

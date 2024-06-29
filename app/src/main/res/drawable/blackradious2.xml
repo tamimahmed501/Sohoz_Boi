@@ -6,12 +6,12 @@
         <shape android:shape="rectangle">
             <gradient
                 android:angle="90"
-                android:startColor="#ffffff"
-                android:endColor="#ffffff" /> <!-- Set a slightly lighter color for shading -->
-            <corners android:topLeftRadius="4dp"
-                android:topRightRadius="4dp"
-                android:bottomLeftRadius="4dp"
-                android:bottomRightRadius="4dp" />
+                android:startColor="@color/statusBar"
+                android:endColor="@color/statusBar" /> <!-- Set a slightly lighter color for shading -->
+            <corners android:topLeftRadius="6dp"
+                android:topRightRadius="6dp"
+                android:bottomLeftRadius="6dp"
+                android:bottomRightRadius="6dp" />
         </shape>
     </item>
 

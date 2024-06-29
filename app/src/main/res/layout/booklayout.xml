@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F1F1F1"
     android:orientation="vertical">
 
 
@@ -27,7 +26,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="160dp"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="3dp"
         android:id="@+id/card"
         app:cardElevation="4dp"
         android:foreground="?attr/selectableItemBackground"

@@ -37,6 +37,8 @@
             android:textColor="@color/white"
             android:text="The Book of ART"
             android:gravity="center|left"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="18dp"/>
 
         <ImageView
@@ -131,10 +133,11 @@
                 android:layout_height="wrap_content"
                 android:text="The Book Of ART"
                 android:textStyle="bold"
-                android:textSize="19dp"
+                android:textSize="16dp"
                 android:paddingTop="18dp"
                 android:paddingLeft="15dp"
                 android:maxLines="2"
+                android:paddingRight="10dp"
                 android:textColor="#A8000000"
                 android:fontFamily="@font/hind"/>
 
@@ -207,7 +210,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -227,8 +230,8 @@
                             android:textColor="@color/statusBar"
                             android:layout_weight="1"
                             android:paddingTop="15dp"
-                            android:textSize="17dp"
-                            android:fontFamily="serif"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/hind"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -240,7 +243,7 @@
                             android:paddingTop="15dp"
                             android:textColor="@color/statusBar"
                             android:layout_weight="1"
-                            android:textSize="17dp"
+                            android:textSize="16dp"
                             android:fontFamily="@font/hind2"
                             android:textStyle="bold"/>
 

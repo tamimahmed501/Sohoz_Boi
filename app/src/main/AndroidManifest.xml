@@ -9,6 +9,7 @@
 
     <!-- Storage permissions -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 
 
@@ -31,7 +32,9 @@
         <activity android:name=".signin" android:exported="false" />
         <activity android:name=".login" android:exported="false" />
         <activity android:name=".pdfread2" android:exported="false" />
-        <activity android:name=".MainActivity" android:exported="false" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
         <activity android:name=".readparagraph" android:exported="false" />
         <activity android:name=".paragraph" android:exported="false" />
         <activity android:name=".AudioPlayer" android:exported="false" android:theme="@style/AppTheme.BlackStatusBarAndNavBar" />

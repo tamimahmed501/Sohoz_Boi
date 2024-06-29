@@ -55,7 +55,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:src="@drawable/sadat"
             android:scaleType="centerCrop"/>
 
 
@@ -71,7 +70,6 @@
             android:layout_height="170dp"
             app:civ_border_color="@color/statusBar"
             app:civ_border_width="3dp"
-            android:src="@drawable/sadat"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"/>

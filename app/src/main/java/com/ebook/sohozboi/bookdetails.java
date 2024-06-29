@@ -65,7 +65,7 @@ public class bookdetails extends AppCompatActivity {
     public static String DESCRIPTION = "";
     public static String VIEWS = "";
     public static String BOOKTYPE = "";
-
+    public static String PAGES = "";
     public static Bitmap Mybitmap = null;
 
     @SuppressLint("MissingInflatedId")
@@ -91,7 +91,7 @@ public class bookdetails extends AppCompatActivity {
         binding.doller.setText(DOLLER+" $");
         binding.author.setText(AUTHOR);
         binding.category.setText(CATAGORY);
-
+        binding.page.setText(PAGES+" পৃষ্ঠা");
 
         if (Mybitmap!=null) binding.images.setImageBitmap(Mybitmap);
 
@@ -114,9 +114,46 @@ public class bookdetails extends AppCompatActivity {
             binding.price.setText("ফ্রী বই");
             binding.read.setText("বইটি পড়ূন");
 
+
+
+
+            binding.buy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    pdfread.PDF_FILENAME=PDFLINK;
+                    pdfread.PDF_URL=PDFLINK;
+                    pdfread.BOOKNAME = BOOKNAME;
+
+                    startActivity(new Intent(bookdetails.this, pdfread.class));
+                    Animatoo.animateSwipeLeft(bookdetails.this);
+
+
+
+
+                }
+            });
+
         } else {
 
-            binding.price.setText(PRICE+" ৳");
+            binding.price.setText(PRICE + " ৳");
+
+
+
+                binding.buy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        startActivity(new Intent(bookdetails.this, deposit.class));
+                        Animatoo.animateSwipeLeft(bookdetails.this);
+
+
+                    }
+                });
+
+
+
 
         }
 
@@ -147,6 +184,13 @@ public class bookdetails extends AppCompatActivity {
 
 
 
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                finish();
+            }
+        });
 
         binding.images.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,7 +340,8 @@ public class bookdetails extends AppCompatActivity {
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(bookdetails.this, bookdetails.class));
+
+                    Toast.makeText(bookdetails.this, "Demo Book", Toast.LENGTH_SHORT).show();
                 }
             });
 

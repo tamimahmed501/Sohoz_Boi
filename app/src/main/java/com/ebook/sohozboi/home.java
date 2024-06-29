@@ -13,13 +13,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.AuthFailureError;
@@ -51,11 +49,10 @@ public class home extends Fragment {
     ArrayList<HashMap<String,String>>arrayList = new ArrayList<>();
 
     Myadapter myadapter;
-    RecyleAdapter recyleAdapter;
     GridView gridView;
-    RecyclerView recyclerView;
 
     LottieAnimationView lottie;
+    LinearLayout paragraph;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -65,16 +62,12 @@ public class home extends Fragment {
 
         imageSlider = myView.findViewById(R.id.image_slider);
         gridView = myView.findViewById(R.id.gridView);
-        recyclerView = myView.findViewById(R.id.recyCcearView);
         lottie = myView.findViewById(R.id.lottie);
-
+        paragraph = myView.findViewById(R.id.paragraph);
 
         myadapter = new Myadapter();
         gridView.setAdapter(myadapter);
 
-        recyleAdapter = new RecyleAdapter();
-        recyclerView.setAdapter(recyleAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
 
 
@@ -87,13 +80,24 @@ public class home extends Fragment {
 
 
 
+        paragraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                startActivity(new Intent(getContext(), paragraph.class));
+                Animatoo.animateSwipeLeft(getContext());
+
+
+            }
+        });
+
+
+
+
+
 
         return myView;
-
-
-
-
-
 
 
 
@@ -171,7 +175,7 @@ public class home extends Fragment {
         arrayList.clear();
 
         lottie.setVisibility(View.VISIBLE);
-        String url = "https://sohozboi-server.vercel.app/api/v1/book/get-all";
+        String url = "https://server.shohozboi.com/api/v1/book/get-all";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -192,6 +196,7 @@ public class home extends Fragment {
                                 String name = book.getString("name");
                                 String description = book.getString("description");
                                 String views = book.getString("views");
+                                String pages = book.getString("pages");
                                 String bookType = book.getString("bookType");
                                 String pdfLink = book.getString("pdfLink");
                                 String coverImage = book.getString("coverImage");
@@ -232,11 +237,11 @@ public class home extends Fragment {
                                 hashMap.put("description", description);
                                 hashMap.put("views", views);
                                 hashMap.put("booktype", bookType);
+                                hashMap.put("pages", pages);
 
                                 arrayList.add(hashMap);
                             }
                             myadapter.notifyDataSetChanged();
-                            recyleAdapter.notifyDataSetChanged();
                         } else {
                             Log.e("Volley", "Response indicates failure: " + response.toString());
                             lottie.setVisibility(View.GONE);
@@ -336,7 +341,7 @@ public class home extends Fragment {
             String description = hashMap.get("description");
             String views = hashMap.get("views");
             String bookType = hashMap.get("booktype");
-
+            String pages = hashMap.get("pages");
 
 
             if (price1.contains("0")){
@@ -363,8 +368,8 @@ public class home extends Fragment {
 
             Picasso.get()
                     .load(urlx)
-                    .placeholder(R.drawable.load2)
-                    .error(R.drawable.load2)
+                    .placeholder(R.drawable.loading2)
+                    .error(R.drawable.loading2)
                     .into(images);
 
 
@@ -378,12 +383,13 @@ public class home extends Fragment {
                     bookdetails.BOOKNAME=name1;
                     bookdetails.AUTHOR=author1;
                     bookdetails.PRICE=price1;
-                    bookdetails.PDFLINK=pdflink;
+                    bookdetails.PDFLINK="https://shohozboi.s3.us-east-1.amazonaws.com/"+pdflink;
                     bookdetails.TXTLINK=txtlink;
                     bookdetails.CATAGORY=categoryName;
                     bookdetails.DOLLER=dollar1;
                     bookdetails.DESCRIPTION=description;
                     bookdetails.READABIT=readAbit;
+                    bookdetails.PAGES=pages;
 
 
 
@@ -408,59 +414,6 @@ public class home extends Fragment {
         }
     }
 
-    private class RecyleAdapter extends RecyclerView.Adapter<RecyleAdapter.MyViewHolder>{
-
-        private class MyViewHolder extends RecyclerView.ViewHolder{
-            TextView price, name, author;
-            CardView card;
-            ImageView images;
-
-            public MyViewHolder(@NonNull View itemView) {
-                super(itemView);
-                price = itemView.findViewById(R.id.price);
-                name = itemView.findViewById(R.id.name);
-                author = itemView.findViewById(R.id.author);
-                card = itemView.findViewById(R.id.card);
-                images = itemView.findViewById(R.id.images);
-            }
-        }
-
-        @NonNull
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View myView = layoutInflater.inflate(R.layout.booklayout2, parent, false);
-            return new MyViewHolder(myView);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            HashMap<String,String> hashMap = arrayList.get(position);
-            String id1 = hashMap.get("id");
-            String name1 = hashMap.get("name");
-            String author1 = hashMap.get("author");
-            String images1 = hashMap.get("images");
-            String price1 = hashMap.get("price");
-            String dollar1 = hashMap.get("dollar");
-
-            holder.name.setText(name1);
-            holder.author.setText(author1);
-            holder.price.setText(price1 + " ৳");
-
-            String urlx = "https://shohozboi.s3.us-east-1.amazonaws.com/" + images1;
-
-            Picasso.get()
-                    .load(images1)
-                    .placeholder(R.drawable.load2)
-                    .error(R.drawable.load2)
-                    .into(holder.images);
-        }
-
-        @Override
-        public int getItemCount() {
-            return arrayList.size();
-        }
-    }
 
 
 }

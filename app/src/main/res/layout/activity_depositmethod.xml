@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D0E1DF"
+    tools:context=".depositmethod">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/statusBar"
+        android:layout_marginBottom="20dp"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:foreground="@drawable/ripple_effect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"
+            android:padding="4dp"
+            android:layout_marginTop="5dp"
+            android:layout_centerInParent="false"
+            android:layout_alignParentLeft="false"
+            android:layout_marginLeft="5dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/changa"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="Select Payment Method"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:weightSum="2">
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bkash"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="10dp"
+            android:elevation="8dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp">
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/bkash"
+                android:padding="25dp"/>
+
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/nagad"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            app:cardCornerRadius="10dp"
+            android:elevation="7dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp">
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/nagadlogo"
+                android:padding="10dp"/>
+
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

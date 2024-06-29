@@ -6,71 +6,100 @@
 
 
 
-
-
-
-
-    <!-- ScrollView for Text Content -->
-    <ScrollView
-        android:id="@+id/scroolView"
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/extractedTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:background="#FFF"
-            android:textColor="#000"
-            android:padding="16dp"/>
-    </ScrollView>
+        android:layout_height="match_parent" />
 
 
 
-
-
-
-    <!-- Top Layout -->
     <RelativeLayout
         android:id="@+id/toplayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#CCC">
+        android:layout_height="45dp"
+        android:elevation="5dp"
+        android:background="@color/statusBar">
 
 
 
         <ImageView
-            android:id="@+id/settingsclick"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu"
-            android:layout_alignParentRight="true"
-            android:foreground="@drawable/ripple_effect"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/back"
+            android:id="@+id/back"
+            android:foreground="@drawable/ripple_effect"
+            android:padding="5dp"/>
 
+
+
+        <TextView
+            android:id="@+id/bookName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Dark Side of Dhaka"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="60dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/changa"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
 
 
     </RelativeLayout>
 
-    <!-- Bottom Layout -->
+
+
+
+
+
+
+
+
     <RelativeLayout
         android:id="@+id/bottomlayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:background="#CCC">
+        android:elevation="5dp"
+        android:background="@color/statusBar">
 
 
-
-        <!-- SeekBar for Text Size -->
         <SeekBar
-            android:id="@+id/textSizeSeekBar"
-            android:layout_width="match_parent"
+            android:id="@+id/seekBar"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="8dp"
-            android:max="40"
-            android:progress="8"/>
+            android:max="100"
+            android:layout_marginLeft="20dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:progress="50"/>
+
+
+        <TextView
+            android:id="@+id/page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Page 1 of 1"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="80dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/changa"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/rotate"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/rotation"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:foreground="@drawable/ripple_effect"
+            />
+
 
 
     </RelativeLayout>
@@ -82,222 +111,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_above="@id/bottomlayout"
-        android:layout_below="@id/toplayout"
-        android:weightSum="3">
-
-
-
-
-
-
-        <LinearLayout
-            android:visibility="invisible"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-
-        </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:id="@+id/setting"
-            android:visibility="visible"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="#6DFFB0"
-            android:orientation="vertical">
-
-
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Select Background Color"
-                android:textColor="@color/black"
-                android:paddingLeft="14dp"
-                android:gravity="center|left"
-                android:textSize="18dp"
-                android:fontFamily="@font/changa"/>
-
-
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="4"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
-
-
-
-
-                <TextView
-                    android:id="@+id/whitebg"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/whitebg"/>
-
-
-
-                <TextView
-                    android:id="@+id/whitebg2"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/nightlight"/>
-
-
-
-
-                <TextView
-                    android:id="@+id/darkbg"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/darkbg"/>
-
-
-
-
-                <TextView
-                    android:id="@+id/darkbg2"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/blackbg"/>
-
-
-
-
-
-            </LinearLayout>
-
-
-
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Select Text Color"
-                android:textColor="@color/black"
-                android:paddingLeft="14dp"
-                android:gravity="center|left"
-                android:textSize="18dp"
-                android:fontFamily="@font/changa"/>
-
-
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="4"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
-
-
-
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/whitebg"/>
-
-
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/nightlight"/>
-
-
-
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/darkbg"/>
-
-
-
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/blackbg"/>
-
-
-
-
-
-            </LinearLayout>
-
-
-            <SeekBar
-                android:id="@+id/brightnessSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="255"
-                android:layout_marginTop="40dp"
-                android:progress="125" />
-
-
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
 
 
 </RelativeLayout>
