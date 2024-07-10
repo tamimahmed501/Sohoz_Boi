@@ -27,33 +27,31 @@ import com.github.barteksc.pdfviewer.PDFView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class pdfread extends AppCompatActivity {
 
     public static String PDF_URL = "";
     public static String PDF_FILENAME = "";
-    private static final String PREF_NAME = "MyPrefs";
     public static String BOOKNAME = "";
-    private static final int STORAGE_PERMISSION_CODE = 1;
     private ProgressBar progressBar;
     private TextView progressPercentage;
     private AlertDialog progressDialog;
     private DownloadPDFTask downloadPDFTask;
     private String savedPdfPath;
-
     private boolean isPdfSaved = false;
     private byte[] pdfData;
-
     private PDFView pdfView;
+    private static final int BUFFER_SIZE = 8192; // 8KB buffer size
 
     ImageView rotateButton, back;
     TextView bookName;
     SeekBar seekBar;
-    String textData;
-    String txtUrl = "https://firebasestorage.googleapis.com/v0/b/druto-pay.appspot.com/o/Documentation%20For%20SOHOZ%20BOI.txt?alt=media&token=f3a887df-cb21-4181-9b59-97d4a15bd7bf"; // Change this to your txt file URL
 
     RelativeLayout toplayout, bottomlayout;
 
@@ -62,7 +60,6 @@ public class pdfread extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfread);
-
 
         pdfView = findViewById(R.id.pdfView);
         bookName = findViewById(R.id.bookName);
@@ -148,15 +145,10 @@ public class pdfread extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-            super.onBackPressed();
-            finish();
-            Animatoo.animateSwipeRight(pdfread.this);
-
+        super.onBackPressed();
+        finish();
+        Animatoo.animateSwipeRight(pdfread.this);
     }
-
-
-
 
     private void displayPdfFromFile(File file) {
         pdfView.fromFile(file).load();
@@ -167,24 +159,26 @@ public class pdfread extends AppCompatActivity {
     }
 
     private class DownloadPDFTask extends AsyncTask<String, Integer, Boolean> {
+        private OkHttpClient client = new OkHttpClient();
 
         @Override
         protected Boolean doInBackground(String... urls) {
             String pdfUrl = urls[0];
             try {
-                URL url = new URL(pdfUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
+                Request request = new Request.Builder()
+                        .url(pdfUrl)
+                        .build();
 
-                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                Response response = client.newCall(request).execute();
+
+                if (!response.isSuccessful()) {
                     return false;
                 }
 
-                int fileLength = connection.getContentLength();
-
-                InputStream input = connection.getInputStream();
+                int fileLength = (int) response.body().contentLength();
+                InputStream input = response.body().byteStream();
                 ByteArrayOutputStream output = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
+                byte[] buffer = new byte[BUFFER_SIZE];
                 long total = 0;
                 int bytesRead;
                 while ((bytesRead = input.read(buffer)) != -1) {
@@ -196,6 +190,7 @@ public class pdfread extends AppCompatActivity {
                 }
                 input.close();
                 pdfData = output.toByteArray();
+                savePdfToFile(pdfData, savedPdfPath);
                 return true;
             } catch (Exception e) {
                 Log.e("Download PDF", "Error downloading PDF", e);
@@ -205,10 +200,12 @@ public class pdfread extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            if (progressBar != null) {
-                progressBar.setProgress(values[0]);
-                progressPercentage.setText(values[0] + "%");
-            }
+            runOnUiThread(() -> {
+                if (progressBar != null) {
+                    progressBar.setProgress(values[0]);
+                    progressPercentage.setText(values[0] + "%");
+                }
+            });
         }
 
         @Override
@@ -221,6 +218,15 @@ public class pdfread extends AppCompatActivity {
             }
         }
     }
+
+    private void savePdfToFile(byte[] pdfData, String filePath) {
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(pdfData);
+        } catch (Exception e) {
+            Log.e("Save PDF", "Error saving PDF", e);
+        }
+    }
+
 
     private void showProgressDialog(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -267,9 +273,7 @@ public class pdfread extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("textData", textData);
+        outState.putString("textData", "1234");
         outState.putByteArray("pdfData", pdfData);
     }
-
-
 }

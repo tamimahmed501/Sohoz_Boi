@@ -42,7 +42,7 @@
             android:textSize="18dp"/>
 
         <ImageView
-            android:id="@+id/addcart"
+            android:id="@+id/cart"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_alignParentRight="true"
@@ -174,34 +174,59 @@
             </LinearLayout>
 
 
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                app:cardCornerRadius="5dp"
-                android:layout_marginRight="10dp"
-                app:cardBackgroundColor="#F5F6F8"
-                android:layout_gravity="left"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/category"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="উপন্যাস"
-                    android:textStyle="normal"
-                    android:fontFamily="@font/hind"
-                    android:gravity="center"
-                    android:textSize="14dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:textColor="#232637"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp">
 
 
-            </androidx.cardview.widget.CardView>
 
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    app:cardBackgroundColor="#F5F6F8"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/category"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="উপন্যাস"
+                        android:textStyle="normal"
+                        android:fontFamily="@font/hind"
+                        android:gravity="center"
+                        android:textSize="14dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="#232637"/>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+
+                <ImageView
+                    android:id="@+id/addcart"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/cart2"
+                    android:background="@drawable/cartbg"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:padding="7dp"/>
+
+
+
+
+            </RelativeLayout>
 
 
 
@@ -399,9 +424,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:textStyle="bold"
-            android:textColor="#353535"
-            android:fontFamily="@font/mavenpro"
+            android:textColor="#252525"
+            android:fontFamily="@font/hind3"
             android:textSize="15dp"
             android:ellipsize="end" />
 
@@ -420,7 +444,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="এই লেখকের অন্যান্য বই"
+            android:text="একই ধরনের অন্যান্য বই"
             android:textSize="16dp"
             android:fontFamily="@font/hind"
             android:textColor="#0A0F27" />

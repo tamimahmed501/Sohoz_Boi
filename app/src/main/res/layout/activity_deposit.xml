@@ -41,7 +41,7 @@
                 android:id="@+id/toptext"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Deposit Proccess"
+                android:text="Payment Proccess"
                 android:textStyle="bold"
                 android:fontFamily="@font/changa"
                 android:gravity="center"

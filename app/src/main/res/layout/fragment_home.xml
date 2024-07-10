@@ -20,30 +20,53 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <androidx.cardview.widget.CardView
+                android:clickable="true"
+                android:id="@+id/search"
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="61dp"
+                android:layout_marginRight="10dp"
                 app:cardElevation="3dp"
+                android:layout_toLeftOf="@id/drawer"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentTop="true"
                 app:cardCornerRadius="10dp">
 
-                <EditText
-                    android:id="@+id/editTextSearch"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/search_background"
-                    android:paddingStart="16dp"
-                    android:hint="পছন্দের বই খুজুন"
-                    android:textColorHint="#555353"
-                    android:paddingEnd="16dp"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:drawableStart="@drawable/search"
-                    android:drawablePadding="8dp" />
+                    android:orientation="horizontal">
+
+
+
+                    <ImageView
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:src="@drawable/search"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="পছন্দের বই খুজুন "
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/hind"
+                        android:gravity="center|left"
+                        android:textSize="15dp"
+                        android:textColor="#535353" />
+
+
+
+
+                </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <ImageView
@@ -173,7 +196,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/hind"
-                    android:textSize="17dp"
+                    android:textSize="16dp"
                     android:textColor="#1B1B1B" />
 
                 <LinearLayout
@@ -222,14 +245,14 @@
                             android:textSize="18dp"
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
-                            android:fontFamily="@font/hind"
+                            android:fontFamily="@font/changa"
                             android:textColor="#E90A0F27"
                             android:paddingLeft="15dp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Ashikur Rahman Naim"
+                            android:text="Shohoz Boi"
                             android:textSize="16dp"
                             android:textStyle="normal"
                             android:fontFamily="@font/hind"
@@ -239,7 +262,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="⭐⭐⭐⭐⭐ (5)"
+                            android:text="⭐⭐⭐⭐⭐ (0)"
                             android:textSize="17dp"
                             android:fontFamily="@font/hind"
                             android:textColor="#0A0F27"
@@ -253,7 +276,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="৪৯ ৳"
+                                android:text="0 ৳"
                                 android:textSize="18dp"
                                 android:textStyle="bold"
                                 android:fontFamily="@font/hind"
@@ -263,7 +286,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="[ $0.99 ]"
+                                android:text="[ $0.00]"
                                 android:textSize="15dp"
                                 android:textStyle="normal"
                                 android:fontFamily="@font/hind"
@@ -285,7 +308,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="একাডেমিক বই"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:fontFamily="@font/hind"
                     android:textColor="#0A0F27" />
             </RelativeLayout>
@@ -296,11 +319,11 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie"
                 android:layout_width="wrap_content"
-                android:layout_height="290dp"
+                android:layout_height="200dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_speed="2"
-                app:lottie_rawRes="@raw/book1" />
+                app:lottie_rawRes="@raw/validate2" />
 
 
             <com.ebook.sohozboi.ExpandableHeightGridView

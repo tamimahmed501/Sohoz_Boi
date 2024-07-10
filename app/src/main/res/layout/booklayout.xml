@@ -28,7 +28,7 @@
         android:layout_height="160dp"
         app:cardCornerRadius="3dp"
         android:id="@+id/card"
-        app:cardElevation="4dp"
+        app:cardElevation="2dp"
         android:foreground="?attr/selectableItemBackground"
         android:layout_margin="3dp">
 

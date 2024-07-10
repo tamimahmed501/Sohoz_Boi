@@ -3,6 +3,7 @@ package com.ebook.sohozboi;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,17 +21,22 @@ import androidx.cardview.widget.CardView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.ebook.sohozboi.databinding.ActivityBookdetailsBinding;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class bookdetails extends AppCompatActivity {
 
@@ -47,7 +53,9 @@ public class bookdetails extends AppCompatActivity {
 
     Myadapter myadapter;
 
+    private static final String PREF_NAME = "MyAppPrefs";
 
+    ImageView addcart;
 
     public static String BOOKNAME = "";
     public static String BOOKID = "";
@@ -72,6 +80,8 @@ public class bookdetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_bookdetails);
         binding = ActivityBookdetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -108,25 +118,34 @@ public class bookdetails extends AppCompatActivity {
         }
 
 
-        if (PRICE.contains("0")){
-
-
-            binding.price.setText("ফ্রী বই");
-            binding.read.setText("বইটি পড়ূন");
-
-
 
 
             binding.buy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    pdfread.PDF_FILENAME=PDFLINK;
-                    pdfread.PDF_URL=PDFLINK;
-                    pdfread.BOOKNAME = BOOKNAME;
 
-                    startActivity(new Intent(bookdetails.this, pdfread.class));
-                    Animatoo.animateSwipeLeft(bookdetails.this);
+                    if (TXTLINK.length()>10){
+
+
+
+                        pdfread2.TEXTLINK="https://shohozboi.s3.us-east-1.amazonaws.com/"+TXTLINK;
+                        pdfread2.BOOKNAME=BOOKNAME;
+                        startActivity(new Intent(bookdetails.this, pdfread2.class));
+                        Animatoo.animateSwipeLeft(bookdetails.this);
+
+                    } else {
+
+
+                        pdfWebView.PDFLINK2="https://shohozboi.s3.us-east-1.amazonaws.com/"+PDFLINK;
+                        pdfWebView.BOOKNAME=BOOKNAME;
+                        startActivity(new Intent(bookdetails.this, pdfWebView.class));
+                        Animatoo.animateSwipeLeft(bookdetails.this);
+
+
+                    }
+
+
 
 
 
@@ -134,29 +153,18 @@ public class bookdetails extends AppCompatActivity {
                 }
             });
 
-        } else {
-
-            binding.price.setText(PRICE + " ৳");
 
 
 
-                binding.buy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        binding.cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                startActivity(new Intent(bookdetails.this, cartList.class));
+                Animatoo.animateSwipeLeft(bookdetails.this);
 
-                        startActivity(new Intent(bookdetails.this, deposit.class));
-                        Animatoo.animateSwipeLeft(bookdetails.this);
-
-
-                    }
-                });
-
-
-
-
-        }
-
+            }
+        });
 
 
 
@@ -203,13 +211,94 @@ public class bookdetails extends AppCompatActivity {
 
 
 
+        binding.addcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+                addCart();
+
+
+
+
+
+
+            }
+        });
 
 
 
 
     }
 
+    private void addCart() {
+        // Initialize Volley request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(bookdetails.this);
 
+        // URL for the POST request
+        String url = "https://server.shohozboi.com/api/v1/cart/create";
+
+        // Create the JSON object for the request body
+        JSONObject requestBody = new JSONObject();
+        try {
+            JSONArray bookIds = new JSONArray();
+            bookIds.put(BOOKID);
+            requestBody.put("bookIds", bookIds);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Create the POST request
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                requestBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle the successful response
+                        try {
+                            boolean success = response.getBoolean("success");
+                            String message = response.getString("message");
+
+                            if (success) {
+                                Toast.makeText(bookdetails.this, "Added To Cart", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(bookdetails.this, "Already Added", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            Toast.makeText(bookdetails.this, "Already Added", Toast.LENGTH_SHORT).show();
+                            
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(bookdetails.this, "Already Added", Toast.LENGTH_SHORT).show();
+                        
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                SharedPreferences sharedPreferencesx = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+                String authToken = sharedPreferencesx.getString("authToken", "");
+                headers.put("Authorization", "Bearer " + authToken);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Add the request to the Volley request queue
+        requestQueue.add(jsonObjectRequest);
+    }
 
 
     private void newBooks() {

@@ -27,11 +27,13 @@ import java.net.URL;
 
 public class pdfread2 extends AppCompatActivity {
 
-    TextView pdfText;
+    TextView pdfText, bookname;
     ImageView rotateButton, back;
     SeekBar seekBar;
     String textData;
-    String txtUrl = "https://firebasestorage.googleapis.com/v0/b/druto-pay.appspot.com/o/Documentation%20For%20SOHOZ%20BOI.txt?alt=media&token=f3a887df-cb21-4181-9b59-97d4a15bd7bf"; // Change this to your txt file URL
+
+    public static String TEXTLINK = ""; // Ensure this is properly initialized with your text file URL
+    public static String BOOKNAME = "";
 
     RelativeLayout toplayout, bottomlayout;
 
@@ -47,6 +49,9 @@ public class pdfread2 extends AppCompatActivity {
         toplayout = findViewById(R.id.toplayout);
         bottomlayout = findViewById(R.id.bottomlayout);
         back = findViewById(R.id.back);
+        bookname = findViewById(R.id.bookname);
+
+        bookname.setText(BOOKNAME);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +85,7 @@ public class pdfread2 extends AppCompatActivity {
             textData = savedInstanceState.getString("textData");
             pdfText.setText(textData);
         } else {
-            new RetrieveTextStream().execute(txtUrl);
+            new RetrieveTextStream().execute(TEXTLINK);
         }
 
         rotateButton.setOnClickListener(new View.OnClickListener() {
