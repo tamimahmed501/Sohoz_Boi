@@ -8,159 +8,209 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:elevation="1dp"
         android:background="@drawable/whitebg"
+        android:weightSum="8"
         android:orientation="horizontal">
 
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="70dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="5dp"
-            android:layout_margin="5dp"
-            android:id="@+id/card"
-            android:foreground="?attr/selectableItemBackground">
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-
-                <ImageView
-                    android:id="@+id/coverimages"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/book"/>
-
-
-
-
-
-            </RelativeLayout>
-
-
-
-
-
-
-        </androidx.cardview.widget.CardView>
-
-
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_weight="7">
 
 
-            <TextView
-                android:id="@+id/bookname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="The Book Of ART"
-                android:textStyle="bold"
-                android:textSize="14dp"
-                android:paddingTop="8dp"
-                android:paddingLeft="15dp"
-                android:maxLines="2"
-                android:paddingRight="10dp"
-                android:textColor="#A8000000"
-                android:fontFamily="@font/hind"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="95dp"
+                app:cardCornerRadius="5dp"
+                android:layout_margin="5dp"
+                android:id="@+id/card"
+                android:foreground="?attr/selectableItemBackground">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+                    <ImageView
+                        android:id="@+id/coverimages"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/book"/>
+
+
+
+
+
+                </RelativeLayout>
+
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/author"
-                    android:layout_marginLeft="15dp"/>
-
-
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
                 <TextView
-                    android:id="@+id/author"
+                    android:id="@+id/bookname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Samuel Bridman"
-                    android:textSize="13dp"
-                    android:layout_marginLeft="5dp"
+                    android:text="The Book Of ART"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="15dp"
                     android:maxLines="1"
-                    android:textColor="#BF000000"
-                    android:fontFamily="serif"/>
+                    android:ellipsize="end"
+                    android:paddingRight="10dp"
+                    android:textColor="#A8000000"
+                    android:fontFamily="@font/hind"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/author"
+                        android:layout_marginLeft="15dp"/>
+
+
+
+
+                    <TextView
+                        android:id="@+id/author"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Samuel Bridman"
+                        android:textSize="13dp"
+                        android:layout_marginLeft="5dp"
+                        android:maxLines="1"
+                        android:textColor="#BF000000"
+                        android:fontFamily="serif"/>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:showDividers="middle"
+                        android:divider="#B20B0B0B"
+                        android:dividerPadding="8dp">
+
+                        <TextView
+                            android:id="@+id/usd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="24 ৳"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:textSize="15dp"
+                            android:fontFamily="@font/hind"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/bdt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="0.44 $"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="14dp"
+                            android:fontFamily="@font/hind"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+
 
 
             </LinearLayout>
 
 
-
-
-
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:showDividers="middle"
-                    android:divider="#B20B0B0B"
-                    android:dividerPadding="8dp">
-
-                    <TextView
-                        android:id="@+id/usd"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="24 ৳"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:textSize="15dp"
-                        android:fontFamily="@font/hind"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/bdt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="0.44 $"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        android:textColor="@color/black"
-                        android:layout_weight="1"
-                        android:textSize="14dp"
-                        android:fontFamily="@font/hind"
-                        android:textStyle="bold"/>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-
-
-
-
         </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="105dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/statusBar"
+                android:checked="true"/>
+
+
+            <ImageView
+                android:foreground="@drawable/ripple_effect"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/delete"
+                android:src="@drawable/trash"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:padding="3dp"
+                android:layout_marginBottom="10dp"/>
+
+
+
+
+        </RelativeLayout>
+
+
+
+
 
 
     </LinearLayout>

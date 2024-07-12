@@ -28,7 +28,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:cardElevation="3dp"
-                android:layout_toLeftOf="@id/drawer"
+                android:layout_toLeftOf="@id/cart"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentTop="true"
                 app:cardCornerRadius="10dp">
@@ -70,7 +70,8 @@
             </androidx.cardview.widget.CardView>
 
             <ImageView
-                android:id="@+id/drawer"
+                android:id="@+id/cart"
+                android:foreground="@drawable/ripple_effect"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="4dp"

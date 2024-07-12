@@ -55,6 +55,8 @@ public class home extends Fragment {
     LinearLayout paragraph;
     CardView search;
 
+    ImageView cart;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -67,9 +69,10 @@ public class home extends Fragment {
         lottie = myView.findViewById(R.id.lottie);
         paragraph = myView.findViewById(R.id.paragraph);
         search = myView.findViewById(R.id.search);
+        cart = myView.findViewById(R.id.cart);
+
         myadapter = new Myadapter();
         gridView.setAdapter(myadapter);
-
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,23 +105,23 @@ public class home extends Fragment {
             }
         });
 
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                startActivity(new Intent(getContext(), cartList.class));
+                Animatoo.animateSwipeLeft(getContext());
 
 
 
+
+
+            }
+        });
 
 
         return myView;
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -185,7 +188,7 @@ public class home extends Fragment {
         arrayList.clear();
 
         lottie.setVisibility(View.VISIBLE);
-        String url = "https://server.shohozboi.com/api/v1/book/get-all";
+        String url = "https://sohozboi-server.vercel.app/api/v1/book/get-all";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,

@@ -28,7 +28,7 @@
                     android:foreground="@drawable/ripple_effect"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/back"
+                    android:src="@drawable/backblack"
                     android:scaleType="centerCrop"
                     android:padding="8dp"
                     android:id="@+id/backbutton"/>
@@ -105,7 +105,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="* সেন্ড-মানি সেকশনে যান।"
+                        android:text="* Payment সেকশনে যান।"
                         android:gravity="left|center"
                         android:paddingLeft="20dp"
                         android:textColor="#000000"

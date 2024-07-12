@@ -2,6 +2,7 @@ package com.ebook.sohozboi;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.view.Window;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.ebook.sohozboi.databinding.ActivityCartListBinding;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class cartList extends AppCompatActivity {
 
     ActivityCartListBinding binding;
@@ -45,6 +50,13 @@ public class cartList extends AppCompatActivity {
     HashMap<String, String> hashMap = new HashMap<>();
 
     Myadapter myadapter;
+
+
+    int totalamount = 0;
+
+    public static String CURRENCY = "BDT";
+
+    public static String BOOKID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +88,48 @@ public class cartList extends AppCompatActivity {
 
 
 
+
+        // Set up a listener to handle radio button click events
+        binding.radioGroupCurrency.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Check which radio button was clicked
+                if (checkedId == R.id.radioButtonBDT) {
+                    // Handle BDT radio button click
+                    // For example, update some UI or perform an action
+                    binding.radioButtonBDT.setChecked(true); // Ensure it stays checked
+                    binding.radioButtonUSD.setChecked(false); // Uncheck other radio button if needed
+
+                    CURRENCY="BDT";
+
+                } else if (checkedId == R.id.radioButtonUSD) {
+                    // Handle USD radio button click
+                    // For example, update some UI or perform an action
+                    binding.radioButtonBDT.setChecked(false); // Uncheck other radio button if needed
+                    binding.radioButtonUSD.setChecked(true); // Ensure it stays checked
+
+                    CURRENCY="USD";
+                }
+            }
+        });
+        binding.buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                depositmethod.CURRENCY = CURRENCY;
+                depositproccess.BOOKID=BOOKID;
+                depositproccess.CURRENCY=CURRENCY;
+
+               String amountx = Integer.toString(totalamount);
+
+                depositproccess.AMOUNT=amountx;
+
+                startActivity(new Intent(cartList.this, depositmethod.class));
+                Animatoo.animateSwipeLeft(cartList.this);
+
+            }
+        });
         getCart();
 
 
@@ -84,6 +138,14 @@ public class cartList extends AppCompatActivity {
 
 
 
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                finish();
+                Animatoo.animateSwipeRight(cartList.this);
+            }
+        });
 
 
     }
@@ -92,8 +154,13 @@ public class cartList extends AppCompatActivity {
         // Initialize Volley request queue
         RequestQueue requestQueue = Volley.newRequestQueue(cartList.this);
 
+        binding.lottie.setVisibility(View.VISIBLE);
+
+        arrayList.clear();
+        arrayList = new ArrayList<>();
+
         // URL for the GET request
-        String url = "https://server.shohozboi.com/api/v1/cart/my-cart";
+        String url = "https://sohozboi-server.vercel.app/api/v1/cart/my-cart";
 
         // Create the GET request
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -104,6 +171,8 @@ public class cartList extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         // Handle the successful response
+
+                        binding.lottie.setVisibility(View.GONE);
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
@@ -114,7 +183,7 @@ public class cartList extends AppCompatActivity {
                                     JSONObject bookObject = itemObject.optJSONObject("book");
 
                                     if (bookObject != null) {
-                                        String bookId = bookObject.getString("bookId");
+                                        String bookId = bookObject.getString("_id");
                                         String name = bookObject.getString("name");
                                         String coverImage = bookObject.getString("coverImage");
                                         boolean status = bookObject.getBoolean("status");
@@ -136,6 +205,15 @@ public class cartList extends AppCompatActivity {
 
 
 
+                                        int totalprice = totalamount + bdt;
+
+                                        binding.amount.setText(String.valueOf(totalprice)+" BDT");
+
+
+
+
+
+
 
 
                                     }
@@ -144,6 +222,8 @@ public class cartList extends AppCompatActivity {
                                 }
                             } else {
                                 String message = response.getString("message");
+
+                                binding.lottie.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -158,6 +238,8 @@ public class cartList extends AppCompatActivity {
                         if (error.networkResponse != null) {
                             int statusCode = error.networkResponse.statusCode;
                             String body = new String(error.networkResponse.data);
+
+                            binding.lottie.setVisibility(View.GONE);
                         } else {
                         }
                     }
@@ -207,7 +289,8 @@ public class cartList extends AppCompatActivity {
 
             TextView usd,bdt,author,bookname;
             CardView card;
-            ImageView coverimages;
+            ImageView coverimages, delete;
+            CheckBox checkBox;
 
 
             usd = viewx.findViewById(R.id.usd);
@@ -215,7 +298,8 @@ public class cartList extends AppCompatActivity {
             author = viewx.findViewById(R.id.author);
             bookname = viewx.findViewById(R.id.bookname);
             coverimages = viewx.findViewById(R.id.coverimages);
-
+            delete = viewx.findViewById(R.id.delete);
+            checkBox = viewx.findViewById(R.id.checkbox);
 
             HashMap<String,String> hashMap = arrayList.get(position);
             String bookId1 = hashMap.get("bookId");
@@ -247,12 +331,31 @@ public class cartList extends AppCompatActivity {
 
 
 
+            if (checkBox.isChecked()){
 
+                BOOKID = bookId1;
+
+            }
+
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    deleteitem(bookId1);
+
+                }
+            });
 
 
 
             return viewx;
         }
+    }
+
+
+    private void deleteitem(String itemid) {
+
     }
 
 

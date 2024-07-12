@@ -238,7 +238,7 @@ public class bookdetails extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(bookdetails.this);
 
         // URL for the POST request
-        String url = "https://server.shohozboi.com/api/v1/cart/create";
+        String url = "https://sohozboi-server.vercel.app/api/v1/cart/create";
 
         // Create the JSON object for the request body
         JSONObject requestBody = new JSONObject();
@@ -290,7 +290,7 @@ public class bookdetails extends AppCompatActivity {
                 Map<String, String> headers = new HashMap<>();
                 SharedPreferences sharedPreferencesx = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
                 String authToken = sharedPreferencesx.getString("authToken", "");
-                headers.put("Authorization", "Bearer " + authToken);
+                headers.put("Authorization", authToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }

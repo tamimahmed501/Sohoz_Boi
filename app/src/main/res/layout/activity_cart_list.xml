@@ -10,6 +10,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/toplay"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:elevation="5dp">
@@ -46,38 +47,92 @@
         android:divider="#F0F1F3"
         android:layout_marginTop="40dp"
         android:scrollbars="none"
+        android:background="#F0F1F3"
+        android:paddingTop="5dp"
         android:id="@+id/listView"/>
 
 
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="2"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        app:lottie_rawRes="@raw/validate2" />
+
+
 
 
     <LinearLayout
+        android:id="@+id/buylay"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#D1EDD2"
+        android:background="#FFFFFF"
         android:orientation="vertical">
-
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cart Summary"
-            android:fontFamily="@font/changa"
-            android:textSize="16dp"
-            android:paddingLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"/>
 
 
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cart Summary"
+                android:fontFamily="@font/changa"
+                android:textSize="16dp"
+                android:paddingLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroupCurrency"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radioButtonBDT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:fontFamily="@font/changa"
+                    android:textStyle="bold"
+                    android:text="BDT"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonUSD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="29dp"
+                    android:fontFamily="@font/changa"
+                    android:textStyle="bold"
+                    android:text="USD"/>
+            </RadioGroup>
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,21 +145,21 @@
                 android:textColor="#454444"/>
 
             <TextView
+                android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2379 BDT"
                 android:textStyle="bold"
-                android:paddingRight="30dp"
+                android:paddingRight="40dp"
                 android:fontFamily="@font/changa"
                 android:textSize="16dp"
                 android:paddingLeft="10dp"
                 android:layout_alignParentRight="true"
-                android:textColor="#E10A53"/>
+                android:textColor="#1E1E1E"/>
 
 
 
         </RelativeLayout>
-
 
 
 
@@ -114,76 +169,64 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
+            <!-- Custom Input Box with EditText -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/apply"
+                android:background="@drawable/custom_input_box_background">
 
 
-
-
-
-                <androidx.cardview.widget.CardView
+                <EditText
+                    android:id="@+id/mobile"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    app:cardElevation="3dp"
-                    android:isScrollContainer="true"
-                    android:layout_toLeftOf="@id/apply"
-                    android:layout_centerInParent="true"
-                    app:cardCornerRadius="7dp">
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="Cupon Code"
+                    android:textColor="#000000"
+                    android:textColorHint="#535353"
+                    android:fontFamily="@font/changa"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:cursorVisible="false"
+                    android:background="@drawable/edittext_background" />
+            </RelativeLayout>
 
-
-
-
-                    <EditText
-                        android:id="@+id/editTextSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/search_background"
-                        android:paddingStart="16dp"
-                        android:hint="Cupon Code"
-                        android:textColorHint="#555353"
-                        android:paddingEnd="16dp"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:imeOptions="actionSearch"
-                        android:inputType="text"
-                        android:drawablePadding="8dp" />
-
-                </androidx.cardview.widget.CardView>
-
-
-
-
-
-
+            <!-- Apply Button -->
             <TextView
                 android:id="@+id/apply"
                 android:layout_width="100dp"
-                android:layout_height="40dp"
+                android:layout_height="43dp"
                 android:text="Apply"
                 android:textStyle="bold"
                 android:fontFamily="@font/changa"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/apply"
                 android:gravity="center"
-                android:layout_marginRight="20dp"
-                android:layout_centerInParent="true"/>
-
-
-
-
-
+                android:layout_marginRight="20dp"/>
         </RelativeLayout>
 
 
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="I agree with Shohoz Boi's terms and conditions and refund policy"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="9dp"/>
 
 
         <TextView
             android:id="@+id/buy"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="Buy Now"
             android:textStyle="bold"
             android:fontFamily="@font/changa"
@@ -192,7 +235,8 @@
             android:background="@drawable/apply"
             android:gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"/>
 
 

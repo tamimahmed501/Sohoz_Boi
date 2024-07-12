@@ -93,7 +93,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Buy With Bkash"
+                            android:text="Payment With Bkash"
                             android:paddingLeft="20dp"
                             android:gravity="center"
                             android:textColor="@color/black"
@@ -143,31 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:maxLines="1"
-                        android:inputType="number" />
-
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:hint="Amount"
-                    app:boxStrokeErrorColor="@color/black"
-                    app:boxStrokeColor="#252525"
-                    app:cursorColor="#252525"
-                    boxStrokeColor="@color/black"
-                    app:hintTextColor="@color/black"
-                    android:layout_marginTop="5dp">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/amount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:maxLines="1"
+                        android:id="@+id/number"
                         android:inputType="number" />
 
 
@@ -257,5 +233,13 @@
 
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/validate2"
+        android:padding="100dp"
+        android:id="@+id/lottie"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
