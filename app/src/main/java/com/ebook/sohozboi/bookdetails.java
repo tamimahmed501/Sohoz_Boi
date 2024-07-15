@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -131,6 +132,11 @@ public class bookdetails extends AppCompatActivity {
 
                         pdfread2.TEXTLINK="https://shohozboi.s3.us-east-1.amazonaws.com/"+TXTLINK;
                         pdfread2.BOOKNAME=BOOKNAME;
+
+
+
+                        Bitmap bitmap = ((BitmapDrawable) binding.images.getDrawable()).getBitmap();
+                        pdfread2.Mybitmap = bitmap;
                         startActivity(new Intent(bookdetails.this, pdfread2.class));
                         Animatoo.animateSwipeLeft(bookdetails.this);
 

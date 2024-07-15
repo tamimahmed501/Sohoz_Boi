@@ -42,7 +42,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/white"
-            android:visibility="gone"
             android:id="@+id/listView"/>
     </LinearLayout>
 
@@ -53,6 +52,7 @@
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
         app:lottie_autoPlay="true"
+        android:visibility="gone"
         app:lottie_rawRes="@raw/nobook" />
 
     <TextView
@@ -63,6 +63,7 @@
         android:fontFamily="@font/changa"
         android:gravity="center"
         android:textColor="#807F7E"
+        android:visibility="gone"
         android:textSize="19dp"
         android:layout_below="@id/lottie"
         android:layout_centerHorizontal="true"/>

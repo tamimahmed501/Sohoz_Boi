@@ -18,7 +18,11 @@
     <color name="invalid">#D51717</color>
 
 
-
+    <color name="white1">#EAD9C0</color>
+    <color name="white2">#B5B5B5</color>
+    <color name="white3">#474747</color>
+    <color name="white4">#191919</color>
+    <color name="white5">#ffffff</color>
 
 
     <color name="darkbg">#494949</color>
