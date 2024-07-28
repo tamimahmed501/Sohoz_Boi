@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,11 +41,11 @@ public class booksearch extends AppCompatActivity {
 
     ArrayList<HashMap<String,String>> arrayList = new ArrayList<>();
     Myadapter myadapter;
-    GridView gridView;
+    ExpandableHeightGridView gridView;
     LottieAnimationView lottie;
     EditText editText;
 
-    private static String URL = "https://server.shohozboi.com/api/v1/book/get-all";
+    private static String URL = "https://sohozboi-server.vercel.app/api/v1//book/get-all?limit=32";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class booksearch extends AppCompatActivity {
             if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 String bookname = editText.getText().toString();
                 if (!bookname.isEmpty()) {
-                    URL = "https://server.shohozboi.com/api/v1/book/get-all?searchTerm=" + bookname;
+                    URL = "https://sohozboi-server.vercel.app/api/v1/book/get-all?searchTerm=" + bookname;
                     newBooks();
                 }
                 return true;
@@ -82,7 +81,9 @@ public class booksearch extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, URL, null,
                 response -> {
+
                     lottie.setVisibility(View.GONE);
+
                     Log.d("Volley", "Response received: " + response.toString()); // Log the raw response
                     try {
                         if (response.getBoolean("success")) {
@@ -91,7 +92,10 @@ public class booksearch extends AppCompatActivity {
 
                             for (int i = 0; i < books.length(); i++) {
                                 JSONObject book = books.getJSONObject(i);
+
+
                                 String bookId = book.getString("bookId");
+                                String id = book.getString("_id");
                                 String name = book.getString("name");
                                 String description = book.getString("description");
                                 String views = book.getString("views");
@@ -118,8 +122,9 @@ public class booksearch extends AppCompatActivity {
                                 String bdt = price.getString("bdt");
                                 String usd = price.getString("usd");
 
+
                                 HashMap<String, String> hashMap = new HashMap<>();
-                                hashMap.put("id", bookId);
+                                hashMap.put("id", id);
                                 hashMap.put("price", bdt);
                                 hashMap.put("dollar", usd);
                                 hashMap.put("name", name);
@@ -144,11 +149,13 @@ public class booksearch extends AppCompatActivity {
                         } else {
                             Log.e("Volley", "Response indicates failure: " + response.toString());
                             lottie.setVisibility(View.GONE);
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Log.e("Volley", "Error parsing JSON response: " + e.getMessage());
                         lottie.setVisibility(View.GONE);
+
                     }
                 },
                 error -> {
@@ -164,6 +171,7 @@ public class booksearch extends AppCompatActivity {
                     } else {
                         errorMessage += "Network response is null";
                         lottie.setVisibility(View.GONE);
+
                     }
                     Log.e("Volley", "Error fetching data: " + errorMessage);
                 }) {
@@ -174,6 +182,7 @@ public class booksearch extends AppCompatActivity {
                 return headers;
             }
         };
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(booksearch.this);
         requestQueue.add(jsonObjectRequest);
@@ -213,6 +222,7 @@ public class booksearch extends AppCompatActivity {
             card = viewx.findViewById(R.id.card);
             images = viewx.findViewById(R.id.images);
 
+
             HashMap<String,String> hashMap = arrayList.get(position);
             String id1 = hashMap.get("id");
             String name1 = hashMap.get("name");
@@ -233,6 +243,7 @@ public class booksearch extends AppCompatActivity {
             String bookType = hashMap.get("booktype");
             String pages = hashMap.get("pages");
 
+
             if (price1.contains("0")) {
                 price.setText("ফ্রি বই");
             } else {
@@ -250,23 +261,39 @@ public class booksearch extends AppCompatActivity {
                     .error(R.drawable.loading2)
                     .into(images);
 
-            card.setOnClickListener(v -> {
-                bookdetails.BOOKNAME = name1;
-                bookdetails.AUTHOR = author1;
-                bookdetails.PRICE = price1;
-                bookdetails.PDFLINK = "https://shohozboi.s3.us-east-1.amazonaws.com/" + pdflink;
-                bookdetails.TXTLINK = txtlink;
-                bookdetails.CATAGORY = categoryName;
-                bookdetails.DOLLER = dollar1;
-                bookdetails.DESCRIPTION = description;
-                bookdetails.READABIT = readAbit;
-                bookdetails.PAGES = pages;
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Bitmap bitmap = ((BitmapDrawable) images.getDrawable()).getBitmap();
-                bookdetails.Mybitmap = bitmap;
-                startActivity(new Intent(booksearch.this, bookdetails.class));
-                Animatoo.animateSwipeLeft(booksearch.this);
+
+
+
+                    bookdetails.BOOKNAME=name1;
+                    bookdetails.AUTHOR=author1;
+                    bookdetails.PRICE=price1;
+                    bookdetails.PDFLINK=pdflink;
+                    bookdetails.TXTLINK=txtlink;
+                    bookdetails.CATAGORY=categoryName;
+                    bookdetails.DOLLER=dollar1;
+                    bookdetails.DESCRIPTION=description;
+                    bookdetails.READABIT=readAbit;
+                    bookdetails.PAGES=pages;
+                    bookdetails.BOOKID=id1;
+
+
+
+                    Bitmap bitmap = ((BitmapDrawable) images.getDrawable()).getBitmap();
+                    bookdetails.Mybitmap = bitmap;
+                    startActivity(new Intent(booksearch.this, bookdetails.class));
+                    Animatoo.animateSwipeLeft(booksearch.this);
+
+
+
+
+
+                }
             });
+
 
             return viewx;
         }

@@ -2,15 +2,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
+        android:padding="12dp"
         android:layout_margin="5dp"
-        android:padding="16dp"
         app:cardCornerRadius="4dp">
 
         <RelativeLayout
@@ -19,49 +20,40 @@
 
             <ImageView
                 android:id="@+id/bookcover"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="150dp"
                 android:layout_alignParentStart="true"
-                android:scaleType="centerCrop"/>
+                android:layout_margin="5dp"
+                android:scaleType="fitXY"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_toEndOf="@id/bookcover"
                 android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/bookname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="Book Name"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/hind3"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="left|center"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Author"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-                <TextView
-                    android:id="@+id/purchasedate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Purchase Date"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
             </LinearLayout>
             
             
             <ImageView
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:id="@+id/delete"
-                android:src="@drawable/trash"
+                android:src="@drawable/success"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="8dp"/>

@@ -231,6 +231,9 @@ public class pdfread2 extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                         hideSystemUI();
                     }
+
+
+
                 } else {
                     toplayout.setVisibility(View.VISIBLE);
                     bottomlayout.setVisibility(View.VISIBLE);

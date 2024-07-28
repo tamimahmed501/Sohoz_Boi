@@ -35,7 +35,6 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="55dp"
             android:textColor="@color/white"
-            android:text="The Book of ART"
             android:gravity="center|left"
             android:maxLines="1"
             android:ellipsize="end"
@@ -131,7 +130,6 @@
                 android:id="@+id/bookname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="The Book Of ART"
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:paddingTop="18dp"
@@ -163,7 +161,6 @@
                     android:id="@+id/author"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Samuel Bridman"
                     android:textSize="15dp"
                     android:layout_marginLeft="5dp"
                     android:maxLines="1"
@@ -250,7 +247,6 @@
                             android:id="@+id/price"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="24 ৳"
                             android:gravity="center"
                             android:textColor="@color/statusBar"
                             android:layout_weight="1"
@@ -263,7 +259,6 @@
                             android:id="@+id/doller"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="0.44 $"
                             android:gravity="center"
                             android:paddingTop="15dp"
                             android:textColor="@color/statusBar"
@@ -276,7 +271,6 @@
                             android:id="@+id/page"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="122 পৃষ্ঠা"
                             android:gravity="center"
                             android:textColor="@color/statusBar"
                             android:textSize="16dp"
@@ -450,15 +444,58 @@
             android:textColor="#0A0F27" />
     </RelativeLayout>
 
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:numColumns="3"
-        android:nextFocusUp="@color/statusBar"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/gridView" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.ebook.sohozboi.ExpandableHeightGridView
+                            android:id="@+id/gridView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:numColumns="3"
+                            android:nextFocusUp="@color/statusBar"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="100dp"
+                            android:layout_marginRight="10dp" />
+
+
+
+
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottie"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_speed="2"
+                            app:lottie_rawRes="@raw/circlevalidate" />
+
+                    </RelativeLayout>
+
+
+
+
+
+
+                </LinearLayout>
+
+            </ScrollView>
 
 
 

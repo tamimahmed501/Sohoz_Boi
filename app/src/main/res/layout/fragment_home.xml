@@ -298,44 +298,260 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="6dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="একাডেমিক বই"
-                    android:textSize="16dp"
-                    android:fontFamily="@font/hind"
-                    android:textColor="#0A0F27" />
-            </RelativeLayout>
 
 
 
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lottie"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_speed="2"
-                app:lottie_rawRes="@raw/validate2" />
 
 
-            <com.ebook.sohozboi.ExpandableHeightGridView
-                android:id="@+id/gridView"
+
+
+
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:numColumns="3"
-                android:nextFocusUp="@color/statusBar"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="100dp"
-                android:layout_marginRight="10dp" />
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="6dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="একাডেমিক বই"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/hind3"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#0A0F27" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="সব দেখুন"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/hind3"
+                        android:paddingLeft="5dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/statusBar" />
+
+
+                </RelativeLayout>
+
+
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_speed="2"
+                    app:lottie_rawRes="@raw/circlevalidate" />
+
+
+
+                <com.ebook.sohozboi.ExpandableHeightGridView
+                    android:id="@+id/gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:nextFocusUp="@color/statusBar"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp" />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="6dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="ছোট গল্প"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/hind3"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#0A0F27" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="সব দেখুন"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/hind3"
+                        android:paddingLeft="5dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/statusBar" />
+
+
+                </RelativeLayout>
+
+
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_speed="2"
+                    app:lottie_rawRes="@raw/circlevalidate" />
+
+
+
+                <com.ebook.sohozboi.ExpandableHeightGridView
+                    android:id="@+id/gridView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:nextFocusUp="@color/statusBar"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp" />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="6dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="কবিতা"
+                        android:textSize="17dp"
+                        android:fontFamily="@font/hind3"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#0A0F27" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="সব দেখুন"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/hind3"
+                        android:paddingLeft="5dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/statusBar" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_speed="2"
+                    app:lottie_rawRes="@raw/circlevalidate" />
+
+
+
+                <com.ebook.sohozboi.ExpandableHeightGridView
+                    android:id="@+id/gridView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:nextFocusUp="@color/statusBar"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginRight="10dp" />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,11 +46,15 @@ public class home extends Fragment {
     ImageSlider imageSlider;
 
     ArrayList<HashMap<String,String>>arrayList = new ArrayList<>();
+    ArrayList<HashMap<String,String>>arrayList2 = new ArrayList<>();
+    ArrayList<HashMap<String,String>>arrayList3 = new ArrayList<>();
 
     Myadapter myadapter;
-    GridView gridView;
+    GolpoAdapter mygolpo;
+    UponnasAdapter myuponnas;
+    ExpandableHeightGridView gridView, gridView2,gridView3, gridView4,gridView5;
 
-    LottieAnimationView lottie;
+    LottieAnimationView lottie,lottie2, lottie3, lottie4, lottie5;
     LinearLayout paragraph;
     CardView search;
 
@@ -66,13 +69,40 @@ public class home extends Fragment {
 
         imageSlider = myView.findViewById(R.id.image_slider);
         gridView = myView.findViewById(R.id.gridView);
+        gridView2 = myView.findViewById(R.id.gridView2);
+        gridView3 = myView.findViewById(R.id.gridView3);
+
         lottie = myView.findViewById(R.id.lottie);
+        lottie2 = myView.findViewById(R.id.lottie2);
+        lottie3 = myView.findViewById(R.id.lottie3);
+
         paragraph = myView.findViewById(R.id.paragraph);
         search = myView.findViewById(R.id.search);
         cart = myView.findViewById(R.id.cart);
 
+
         myadapter = new Myadapter();
         gridView.setAdapter(myadapter);
+
+
+        mygolpo = new GolpoAdapter();
+        gridView2.setAdapter(mygolpo);
+
+
+        myuponnas = new UponnasAdapter();
+        gridView3.setAdapter(myuponnas);
+
+
+
+        imageSlider();
+
+
+
+        newBooks();
+        golpo();
+        uponnas();
+
+
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +114,6 @@ public class home extends Fragment {
 
 
 
-        imageSlider();
-
-
-
-        newBooks();
 
 
 
@@ -188,7 +213,7 @@ public class home extends Fragment {
         arrayList.clear();
 
         lottie.setVisibility(View.VISIBLE);
-        String url = "https://sohozboi-server.vercel.app/api/v1/book/get-all";
+        String url = "https://sohozboi-server.vercel.app/api/v1/book/get-all?limit=11&categories=6675039fd7e09d92525e4d1b";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -407,6 +432,7 @@ public class home extends Fragment {
                     bookdetails.READABIT=readAbit;
                     bookdetails.PAGES=pages;
                     bookdetails.BOOKID=id1;
+                    bookdetails.CATAGORYID=categoryId;
 
 
 
@@ -430,6 +456,505 @@ public class home extends Fragment {
             return viewx;
         }
     }
+
+
+    private void golpo() {
+        arrayList2.clear();
+
+        lottie2.setVisibility(View.VISIBLE);
+        String url = "https://sohozboi-server.vercel.app/api/v1/book/get-all?limit=11&categories=66687e3d9973d1ff63f2dcb6";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+
+                    lottie2.setVisibility(View.GONE);
+
+                    Log.d("Volley", "Response received: " + response.toString()); // Log the raw response
+                    try {
+                        if (response.getBoolean("success")) {
+                            JSONObject data = response.getJSONObject("data");
+                            JSONArray books = data.getJSONArray("books");
+
+                            for (int i = 0; i < books.length(); i++) {
+                                JSONObject book = books.getJSONObject(i);
+
+
+                                String bookId = book.getString("bookId");
+                                String id = book.getString("_id");
+                                String name = book.getString("name");
+                                String description = book.getString("description");
+                                String views = book.getString("views");
+                                String pages = book.getString("pages");
+                                String bookType = book.getString("bookType");
+                                String pdfLink = book.optString("pdfLink", ""); // Use optString with default value
+                                String coverImage = book.getString("coverImage");
+                                String txtLink = book.optString("txtLink", ""); // Use optString with default value
+                                String readAbit = book.getString("readABit");
+
+                                JSONArray categories = book.getJSONArray("categories");
+                                String categoryId = categories.getJSONObject(0).getString("_id");
+                                String categoryName = categories.getJSONObject(0).getString("name");
+
+                                JSONArray authors = book.getJSONArray("author");
+                                String authorId = authors.getJSONObject(0).getString("_id");
+                                String authorName = authors.getJSONObject(0).getString("name");
+
+                                JSONObject publisher = book.getJSONObject("publisher");
+                                String publisherId = publisher.getString("_id");
+                                String publisherName = publisher.getString("name");
+
+                                JSONObject price = book.getJSONObject("price");
+                                String bdt = price.getString("bdt");
+                                String usd = price.getString("usd");
+
+
+                                HashMap<String, String> hashMap = new HashMap<>();
+                                hashMap.put("id", id);
+                                hashMap.put("price", bdt);
+                                hashMap.put("dollar", usd);
+                                hashMap.put("name", name);
+                                hashMap.put("author", authorName);
+                                hashMap.put("authorid", authorId);
+                                hashMap.put("images", coverImage);
+                                hashMap.put("publisher", publisherName);
+                                hashMap.put("publisherid", publisherId);
+                                hashMap.put("categoryname", categoryName);
+                                hashMap.put("categoryid", categoryId);
+                                hashMap.put("txtlink", txtLink);
+                                hashMap.put("pdflink", pdfLink);
+                                hashMap.put("readabit", readAbit);
+                                hashMap.put("description", description);
+                                hashMap.put("views", views);
+                                hashMap.put("booktype", bookType);
+                                hashMap.put("pages", pages);
+
+                                arrayList2.add(hashMap);
+                            }
+                            mygolpo.notifyDataSetChanged();
+                        } else {
+                            Log.e("Volley", "Response indicates failure: " + response.toString());
+                            lottie2.setVisibility(View.GONE);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.e("Volley", "Error parsing JSON response: " + e.getMessage());
+                        lottie2.setVisibility(View.GONE);
+
+                    }
+                },
+                error -> {
+                    String errorMessage = "";
+                    if (error.networkResponse != null) {
+                        int statusCode = error.networkResponse.statusCode;
+                        errorMessage += "Status Code: " + statusCode + "\n";
+                        try {
+                            errorMessage += "Response Data: " + new String(error.networkResponse.data, "UTF-8");
+                        } catch (Exception e) {
+                            errorMessage += "Error parsing network response data";
+                        }
+                    } else {
+                        errorMessage += "Network response is null";
+                        lottie2.setVisibility(View.GONE);
+
+                    }
+                    Log.e("Volley", "Error fetching data: " + errorMessage);
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("x-api-key", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGVyZV9pc19hX3NlY3JldCIsIm5hbWUiOiJuYWhpZF9oYXNzYW5fYnVsYnVsIiwiaWF0IjoxNTE2MjM5MDIyLCJhdXRob3IiOiJuYWhpZGhhc3NhbiJ9.iTGyvQVlvqv_Z-R5ZKn7mNKJoR6oT_RglbMxvU-XPM0");
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private class GolpoAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return arrayList2.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @SuppressLint({"MissingInflatedId", "ResourceAsColor"})
+        @Override
+        public View getView(int position, View viewx, ViewGroup parent) {
+            if (viewx == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) getLayoutInflater().getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                viewx = layoutInflater.inflate(R.layout.booklayout, parent, false);
+            }
+
+
+            TextView price,name,author;
+            CardView card;
+            ImageView images;
+
+
+
+
+
+            price = viewx.findViewById(R.id.price);
+            name = viewx.findViewById(R.id.name);
+            author = viewx.findViewById(R.id.author);
+            card = viewx.findViewById(R.id.card);
+            images = viewx.findViewById(R.id.images);
+
+
+            HashMap<String,String> hashMap = arrayList2.get(position);
+            String id1 = hashMap.get("id");
+            String name1 = hashMap.get("name");
+            String author1 = hashMap.get("author");
+            String images1 = hashMap.get("images");
+            String price1 = hashMap.get("price");
+            String dollar1 = hashMap.get("dollar");
+            String authorId = hashMap.get("authorid");
+            String publisher = hashMap.get("publisher");
+            String publisherid = hashMap.get("publisherid");
+            String categoryName = hashMap.get("categoryname");
+            String categoryId = hashMap.get("categoryid");
+            String txtlink = hashMap.get("txtlink");
+            String pdflink = hashMap.get("pdflink");
+            String readAbit = hashMap.get("readabit");
+            String description = hashMap.get("description");
+            String views = hashMap.get("views");
+            String bookType = hashMap.get("booktype");
+            String pages = hashMap.get("pages");
+
+
+            if (price1.contains("0")){
+
+                price.setText("ফ্রি বই");
+
+
+            } else {
+
+                price.setText(price1+" ৳");
+
+
+            }
+
+
+            name.setText(name1);
+            author.setText(author1);
+
+
+
+            String urlx = "https://shohozboi.s3.us-east-1.amazonaws.com/"+images1;
+
+
+
+            Picasso.get()
+                    .load(urlx)
+                    .placeholder(R.drawable.loading2)
+                    .error(R.drawable.loading2)
+                    .into(images);
+
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+
+                    bookdetails.BOOKNAME=name1;
+                    bookdetails.AUTHOR=author1;
+                    bookdetails.PRICE=price1;
+                    bookdetails.PDFLINK=pdflink;
+                    bookdetails.TXTLINK=txtlink;
+                    bookdetails.CATAGORY=categoryName;
+                    bookdetails.DOLLER=dollar1;
+                    bookdetails.DESCRIPTION=description;
+                    bookdetails.READABIT=readAbit;
+                    bookdetails.PAGES=pages;
+                    bookdetails.BOOKID=id1;
+                    bookdetails.CATAGORYID=categoryId;
+
+
+
+                    Bitmap bitmap = ((BitmapDrawable) images.getDrawable()).getBitmap();
+                    bookdetails.Mybitmap = bitmap;
+                    startActivity(new Intent(getContext(), bookdetails.class));
+                    Animatoo.animateSwipeLeft(getContext());
+
+
+
+
+
+                }
+            });
+
+
+
+
+
+
+            return viewx;
+        }
+    }
+
+
+    private void uponnas() {
+        arrayList3.clear();
+
+        lottie3.setVisibility(View.VISIBLE);
+        String url = "https://sohozboi-server.vercel.app/api/v1/book/get-all?limit=11&categories=66686c532d9a8328b7b63a9c";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+
+                    lottie3.setVisibility(View.GONE);
+
+                    Log.d("Volley", "Response received: " + response.toString()); // Log the raw response
+                    try {
+                        if (response.getBoolean("success")) {
+                            JSONObject data = response.getJSONObject("data");
+                            JSONArray books = data.getJSONArray("books");
+
+                            for (int i = 0; i < books.length(); i++) {
+                                JSONObject book = books.getJSONObject(i);
+
+
+                                String bookId = book.getString("bookId");
+                                String id = book.getString("_id");
+                                String name = book.getString("name");
+                                String description = book.getString("description");
+                                String views = book.getString("views");
+                                String pages = book.getString("pages");
+                                String bookType = book.getString("bookType");
+                                String pdfLink = book.optString("pdfLink", ""); // Use optString with default value
+                                String coverImage = book.getString("coverImage");
+                                String txtLink = book.optString("txtLink", ""); // Use optString with default value
+                                String readAbit = book.getString("readABit");
+
+                                JSONArray categories = book.getJSONArray("categories");
+                                String categoryId = categories.getJSONObject(0).getString("_id");
+                                String categoryName = categories.getJSONObject(0).getString("name");
+
+                                JSONArray authors = book.getJSONArray("author");
+                                String authorId = authors.getJSONObject(0).getString("_id");
+                                String authorName = authors.getJSONObject(0).getString("name");
+
+                                JSONObject publisher = book.getJSONObject("publisher");
+                                String publisherId = publisher.getString("_id");
+                                String publisherName = publisher.getString("name");
+
+                                JSONObject price = book.getJSONObject("price");
+                                String bdt = price.getString("bdt");
+                                String usd = price.getString("usd");
+
+
+                                HashMap<String, String> hashMap = new HashMap<>();
+                                hashMap.put("id", id);
+                                hashMap.put("price", bdt);
+                                hashMap.put("dollar", usd);
+                                hashMap.put("name", name);
+                                hashMap.put("author", authorName);
+                                hashMap.put("authorid", authorId);
+                                hashMap.put("images", coverImage);
+                                hashMap.put("publisher", publisherName);
+                                hashMap.put("publisherid", publisherId);
+                                hashMap.put("categoryname", categoryName);
+                                hashMap.put("categoryid", categoryId);
+                                hashMap.put("txtlink", txtLink);
+                                hashMap.put("pdflink", pdfLink);
+                                hashMap.put("readabit", readAbit);
+                                hashMap.put("description", description);
+                                hashMap.put("views", views);
+                                hashMap.put("booktype", bookType);
+                                hashMap.put("pages", pages);
+
+                                arrayList3.add(hashMap);
+                            }
+                            myuponnas.notifyDataSetChanged();
+                        } else {
+                            Log.e("Volley", "Response indicates failure: " + response.toString());
+                            lottie3.setVisibility(View.GONE);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.e("Volley", "Error parsing JSON response: " + e.getMessage());
+                        lottie3.setVisibility(View.GONE);
+
+                    }
+                },
+                error -> {
+                    String errorMessage = "";
+                    if (error.networkResponse != null) {
+                        int statusCode = error.networkResponse.statusCode;
+                        errorMessage += "Status Code: " + statusCode + "\n";
+                        try {
+                            errorMessage += "Response Data: " + new String(error.networkResponse.data, "UTF-8");
+                        } catch (Exception e) {
+                            errorMessage += "Error parsing network response data";
+                        }
+                    } else {
+                        errorMessage += "Network response is null";
+                        lottie3.setVisibility(View.GONE);
+
+                    }
+                    Log.e("Volley", "Error fetching data: " + errorMessage);
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("x-api-key", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGVyZV9pc19hX3NlY3JldCIsIm5hbWUiOiJuYWhpZF9oYXNzYW5fYnVsYnVsIiwiaWF0IjoxNTE2MjM5MDIyLCJhdXRob3IiOiJuYWhpZGhhc3NhbiJ9.iTGyvQVlvqv_Z-R5ZKn7mNKJoR6oT_RglbMxvU-XPM0");
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private class UponnasAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return arrayList3.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @SuppressLint({"MissingInflatedId", "ResourceAsColor"})
+        @Override
+        public View getView(int position, View viewx, ViewGroup parent) {
+            if (viewx == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) getLayoutInflater().getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                viewx = layoutInflater.inflate(R.layout.booklayout, parent, false);
+            }
+
+
+            TextView price,name,author;
+            CardView card;
+            ImageView images;
+
+
+
+
+
+            price = viewx.findViewById(R.id.price);
+            name = viewx.findViewById(R.id.name);
+            author = viewx.findViewById(R.id.author);
+            card = viewx.findViewById(R.id.card);
+            images = viewx.findViewById(R.id.images);
+
+
+            HashMap<String,String> hashMap = arrayList3.get(position);
+            String id1 = hashMap.get("id");
+            String name1 = hashMap.get("name");
+            String author1 = hashMap.get("author");
+            String images1 = hashMap.get("images");
+            String price1 = hashMap.get("price");
+            String dollar1 = hashMap.get("dollar");
+            String authorId = hashMap.get("authorid");
+            String publisher = hashMap.get("publisher");
+            String publisherid = hashMap.get("publisherid");
+            String categoryName = hashMap.get("categoryname");
+            String categoryId = hashMap.get("categoryid");
+            String txtlink = hashMap.get("txtlink");
+            String pdflink = hashMap.get("pdflink");
+            String readAbit = hashMap.get("readabit");
+            String description = hashMap.get("description");
+            String views = hashMap.get("views");
+            String bookType = hashMap.get("booktype");
+            String pages = hashMap.get("pages");
+
+
+            if (price1.contains("0")){
+
+                price.setText("ফ্রি বই");
+
+
+            } else {
+
+                price.setText(price1+" ৳");
+
+
+            }
+
+
+            name.setText(name1);
+            author.setText(author1);
+
+
+
+            String urlx = "https://shohozboi.s3.us-east-1.amazonaws.com/"+images1;
+
+
+
+            Picasso.get()
+                    .load(urlx)
+                    .placeholder(R.drawable.loading2)
+                    .error(R.drawable.loading2)
+                    .into(images);
+
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+
+                    bookdetails.BOOKNAME=name1;
+                    bookdetails.AUTHOR=author1;
+                    bookdetails.PRICE=price1;
+                    bookdetails.PDFLINK=pdflink;
+                    bookdetails.TXTLINK=txtlink;
+                    bookdetails.CATAGORY=categoryName;
+                    bookdetails.DOLLER=dollar1;
+                    bookdetails.DESCRIPTION=description;
+                    bookdetails.READABIT=readAbit;
+                    bookdetails.PAGES=pages;
+                    bookdetails.BOOKID=id1;
+                    bookdetails.CATAGORYID=categoryId;
+
+
+
+                    Bitmap bitmap = ((BitmapDrawable) images.getDrawable()).getBitmap();
+                    bookdetails.Mybitmap = bitmap;
+                    startActivity(new Intent(getContext(), bookdetails.class));
+                    Animatoo.animateSwipeLeft(getContext());
+
+
+
+
+
+                }
+            });
+
+
+
+
+
+
+            return viewx;
+        }
+    }
+
 
 
 

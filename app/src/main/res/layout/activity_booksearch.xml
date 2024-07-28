@@ -112,17 +112,37 @@
 
 
 
-
-
-        <com.ebook.sohozboi.ExpandableHeightGridView
-            android:id="@+id/gridView"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="3"
-            android:nextFocusUp="@color/statusBar"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginRight="10dp" />
+            android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+
+
+                <com.ebook.sohozboi.ExpandableHeightGridView
+                    android:id="@+id/gridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="3"
+                    android:nextFocusUp="@color/statusBar"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginRight="10dp" />
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
 
 
 
@@ -146,7 +166,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_speed="2"
-            app:lottie_rawRes="@raw/validate2" />
+            app:lottie_rawRes="@raw/circlevalidate" />
 
 
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,17 +33,36 @@ public class mybook extends Fragment {
     Myadapter myadapter;
     DatabaseHelper dbHelper;
 
+    RelativeLayout mybook;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_mybook, container, false);
 
+        mybook = myView.findViewById(R.id.mybook);
         listView = myView.findViewById(R.id.listView);
         dbHelper = new DatabaseHelper(getContext());
         loadBooksFromDatabase();
 
         myadapter = new Myadapter(getContext(), arrayList);
         listView.setAdapter(myadapter);
+
+
+        mybook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                startActivity(new Intent(getContext(), myOrder.class));
+                Animatoo.animateSwipeLeft(getContext());
+
+
+
+
+
+            }
+        });
 
         return myView;
     }

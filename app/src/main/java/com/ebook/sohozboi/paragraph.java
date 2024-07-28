@@ -37,7 +37,7 @@ public class paragraph extends AppCompatActivity implements androidx.appcompat.w
 
     LottieAnimationView lottie;
     private static final String TAG = "Paragraph";
-    private static final String URL = "https://server.shohozboi.com/api/v1/paragraph/get-all?skipLimit=YES";
+    private static final String URL = "https://sohozboi-server.vercel.app/api/v1/paragraph/get-all?skipLimit=YES";
     private static final String API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aGVyZV9pc19hX3NlY3JldCIsIm5hbWUiOiJuYWhpZF9oYXNzYW5fYnVsYnVsIiwiaWF0IjoxNTE2MjM5MDIyLCJhdXRob3IiOiJuYWhpZGhhc3NhbiJ9.iTGyvQVlvqv_Z-R5ZKn7mNKJoR6oT_RglbMxvU-XPM0";
 
     ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();

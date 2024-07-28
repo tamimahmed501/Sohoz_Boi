@@ -109,7 +109,7 @@ public class login extends AppCompatActivity {
         dialog.setCancelable(true);
         dialog.show();
 
-        String url = "https://server.shohozboi.com/api/v1/user/auth/login";
+        String url = "https://sohozboi-server.vercel.app/api/v1/user/auth/login";
         JSONObject requestBody = new JSONObject();
         try {
             requestBody.put("email", email);
@@ -126,7 +126,7 @@ public class login extends AppCompatActivity {
                     try {
                         if (response.getBoolean("success")) {
                             String accessToken = response.getJSONObject("data").getString("accesstoken");
-                            saveAccessToken(accessToken);
+                            saveAccessToken(accessToken, password, email);
 
 
 
@@ -169,15 +169,23 @@ public class login extends AppCompatActivity {
         requestQueue.add(loginRequest);
     }
 
-    private void saveAccessToken(String accessToken) {
+    private void saveAccessToken(String accessToken, String password, String email) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("authToken", accessToken);
+        editor.putString("password", password);
+        editor.putString("email", email);
+
+
+
+
+
+
         editor.apply();
     }
 
     private void fetchUserData(String accessToken, Dialog dialog) {
-        String url = "https://server.shohozboi.com/api/v1/user/get-me";
+        String url = "https://sohozboi-server.vercel.app/api/v1/user/get-me";
         JsonObjectRequest userRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

@@ -119,7 +119,7 @@ public class signin extends AppCompatActivity {
                     requestBody.put("email", emailx);
                     requestBody.put("password", passwordx);
 
-                    String url = "https://server.shohozboi.com/api/v1/user/auth/signup";
+                    String url = "https://sohozboi-server.vercel.app/api/v1/user/auth/signup";
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                             Request.Method.POST,
