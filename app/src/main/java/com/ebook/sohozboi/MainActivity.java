@@ -33,11 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout bottomlay;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         frameLayout = findViewById(R.id.frame);
@@ -159,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
 
 
     private void getToken(){

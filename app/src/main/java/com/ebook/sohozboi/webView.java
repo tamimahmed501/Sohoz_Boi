@@ -110,7 +110,6 @@ public class webView extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAndRemoveTask();
         finish();
         Animatoo.animateSwipeRight(webView.this);
 

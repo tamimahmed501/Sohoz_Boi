@@ -59,12 +59,7 @@ public class Author extends Fragment {
         lottie = myView.findViewById(R.id.lottie);
 
 
-        myadapter = new Myadapter();
-        gridView.setAdapter(myadapter);
 
-
-
-        author();
 
 
 

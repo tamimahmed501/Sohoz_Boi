@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -18,6 +19,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 public class free_buy_success extends AppCompatActivity {
 
     ImageView  back;
+    TextView dashbord;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -26,6 +28,7 @@ public class free_buy_success extends AppCompatActivity {
         setContentView(R.layout.activity_free_buy_success);
 
         back = findViewById(R.id.back);
+        dashbord = findViewById(R.id.dashboard);
 
 
 
@@ -64,6 +67,19 @@ public class free_buy_success extends AppCompatActivity {
 
 
 
+        dashbord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                finish();
+                startActivity(new Intent(free_buy_success.this, myOrder.class));
+                Animatoo.animateSwipeLeft(free_buy_success.this);
+
+
+
+            }
+        });
 
 
     }

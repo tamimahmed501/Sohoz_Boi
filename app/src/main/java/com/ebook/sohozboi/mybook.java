@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +33,18 @@ public class mybook extends Fragment {
     Myadapter myadapter;
     DatabaseHelper dbHelper;
 
-    RelativeLayout mybook;
+    LinearLayout noobook;
+    TextView mybook;
 
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_mybook, container, false);
+
+
+
+
+        noobook = myView.findViewById(R.id.noobook);
 
         mybook = myView.findViewById(R.id.mybook);
         listView = myView.findViewById(R.id.listView);
@@ -47,6 +53,11 @@ public class mybook extends Fragment {
 
         myadapter = new Myadapter(getContext(), arrayList);
         listView.setAdapter(myadapter);
+
+
+
+
+
 
 
         mybook.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +79,8 @@ public class mybook extends Fragment {
     }
 
     private void loadBooksFromDatabase() {
+        arrayList.clear();  // Clear the arrayList before loading new data
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(
                 DatabaseHelper.TABLE_NAME,
@@ -84,14 +97,21 @@ public class mybook extends Fragment {
                 HashMap<String, String> book = new HashMap<>();
                 book.put("id", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_ID)));
                 book.put("name", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_BOOK_NAME)));
-                book.put("author", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.AUTHOR_NAME))); // Corrected to COLUMN_AUTHOR
+                book.put("author", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.AUTHOR_NAME)));
                 book.put("images", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.IMAGE_BITMAP)));
                 arrayList.add(book);
             }
             cursor.close();
         }
         db.close();
+
+        if (arrayList.isEmpty()) {
+            noobook.setVisibility(View.VISIBLE);
+        } else {
+            noobook.setVisibility(View.GONE);
+        }
     }
+
 
 
     private class Myadapter extends BaseAdapter {
@@ -136,11 +156,10 @@ public class mybook extends Fragment {
             HashMap<String, String> hashMap = arrayList.get(position);
             String id1 = hashMap.get("id");
             String name1 = hashMap.get("name");
-            String author1 = hashMap.get("author");
             String images1 = hashMap.get("images");
 
             bookname.setText(name1);
-            author.setText(author1);
+
 
             // Decode the base64 image string to a bitmap and set it to the ImageView
             if (images1 != null && !images1.isEmpty()) {
@@ -165,6 +184,8 @@ public class mybook extends Fragment {
                     deleteBookFromDatabase(id1);
                 }
             });
+
+
 
             return convertView;
         }

@@ -28,7 +28,8 @@
                 android:paddingBottom="80dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:fontFamily="@font/changa"
+                android:textStyle="bold"
+                android:fontFamily="@font/hind"
                 android:justificationMode="inter_word"
                 android:layout_height="match_parent"/>
 

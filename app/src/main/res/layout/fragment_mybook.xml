@@ -13,7 +13,6 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/mybook"
             android:foreground="?attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -22,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Click Here for Purchaced Book"
+                android:text="Downloaded Book"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:textSize="18dp"
@@ -47,26 +46,63 @@
             android:id="@+id/listView"/>
     </LinearLayout>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        app:lottie_autoPlay="true"
+    <LinearLayout
         android:visibility="gone"
-        app:lottie_rawRes="@raw/nobook" />
+        android:id="@+id/noobook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/nobook" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Downloaded Book Found.\nCheck My Purchase."
+            android:textStyle="bold"
+            android:fontFamily="@font/changa"
+            android:gravity="center"
+            android:textColor="#3A3A3A"
+            android:textSize="16dp"
+            android:layout_below="@id/lottie"
+            android:layout_centerHorizontal="true"/>
+
+
+
+    </LinearLayout>
+
 
     <TextView
+        android:id="@+id/mybook"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Book Found"
+        android:text="My Purchase"
         android:textStyle="bold"
         android:fontFamily="@font/changa"
         android:gravity="center"
-        android:textColor="#807F7E"
-        android:visibility="gone"
-        android:textSize="19dp"
-        android:layout_below="@id/lottie"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="#FFFFFF"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:elevation="4dp"
+        android:background="@drawable/cartbg"
+        android:layout_marginBottom="100dp"/>
+
+
+
+
 </RelativeLayout>

@@ -71,7 +71,8 @@
         android:textSize="16dp"
         android:fontFamily="@font/changa"
         android:textColor="@color/white"
-        android:id="@+id/dashboard1"
+        android:id="@+id/dashboard"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_gravity="center"/>
 
 

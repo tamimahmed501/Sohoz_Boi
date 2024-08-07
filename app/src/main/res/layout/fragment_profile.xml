@@ -53,8 +53,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp"
-                android:src="@drawable/settings" />
+                android:layout_marginBottom="15dp"/>
 
 
 
@@ -116,6 +115,7 @@
 
 
         <TextView
+            android:id="@+id/editprofile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Edit Profile"

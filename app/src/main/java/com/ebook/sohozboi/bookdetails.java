@@ -131,8 +131,9 @@ public class bookdetails extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
+                    int bookprice = Integer.getInteger(PRICE);
 
-                    if (PRICE.contains("0")){
+                    if (bookprice==0){
 
                         buyfreeBook();
 
@@ -140,6 +141,7 @@ public class bookdetails extends AppCompatActivity {
                     } else {
 
 
+                        Toast.makeText(bookdetails.this, "Add to cart first", Toast.LENGTH_SHORT).show();
 
 
 
@@ -573,7 +575,6 @@ public class bookdetails extends AppCompatActivity {
     private void buyfreeBook(){
 
 
-        Toast.makeText(bookdetails.this, "Running", Toast.LENGTH_SHORT).show();
 
 
                 // URL of the API

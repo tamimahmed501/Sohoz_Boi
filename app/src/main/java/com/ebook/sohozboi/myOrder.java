@@ -222,16 +222,7 @@ public class myOrder extends AppCompatActivity {
                             Log.d("BookDetails", "TXT Link: " + txtLink);
 
 
-                            if (bookType.equals("pdf")) {
-
-                                pdfWebView.PDFLINK2="https://shohozboi.s3.us-east-1.amazonaws.com/"+pdfLink;
-                                pdfWebView.BOOKNAME=name;
-                                startActivity(new Intent(myOrder.this, pdfWebView.class));
-                                Animatoo.animateSwipeLeft(myOrder.this);
-
-
-                            } else {
-
+                            if (txtLink.length()>10){
 
 
                                 pdfread2.TEXTLINK="https://shohozboi.s3.us-east-1.amazonaws.com/"+txtLink;
@@ -243,6 +234,15 @@ public class myOrder extends AppCompatActivity {
                                 pdfread2.Mybitmap = bitmap;
                                 startActivity(new Intent(myOrder.this, pdfread2.class));
                                 Animatoo.animateSwipeLeft(myOrder.this);
+
+
+                            } else {
+
+                                pdfWebView.PDFLINK2="https://shohozboi.s3.us-east-1.amazonaws.com/"+pdfLink;
+                                pdfWebView.BOOKNAME=name;
+                                startActivity(new Intent(myOrder.this, pdfWebView.class));
+                                Animatoo.animateSwipeLeft(myOrder.this);
+
 
 
                             }

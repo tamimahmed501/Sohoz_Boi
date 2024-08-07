@@ -34,7 +34,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class profile extends Fragment {
 
-    TextView login, createaccount, name, email, id, logout;
+    TextView login, createaccount, name, email, id, logout,editprofile;
     LinearLayout profilelay, loginlay;
     RelativeLayout invite,faq, privacy, cpassword,agent,delete;
 
@@ -60,7 +60,7 @@ public class profile extends Fragment {
         cpassword = myView.findViewById(R.id.cpassword);
         agent = myView.findViewById(R.id.agent);
         delete = myView.findViewById(R.id.delete);
-
+        editprofile = myView.findViewById(R.id.editprofile);
         logout.setOnClickListener(v -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -94,6 +94,14 @@ public class profile extends Fragment {
 
 
 
+        editprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getContext(), "You cann't use this service right now.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
         agent.setOnClickListener(new View.OnClickListener() {
@@ -123,8 +131,9 @@ public class profile extends Fragment {
         cpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), com.ebook.sohozboi.passChange.class));
-                Animatoo.animateSwipeLeft(getContext());
+
+                Toast.makeText(getContext(), "You cann't use this service right now.", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -182,7 +191,7 @@ public class profile extends Fragment {
             public void onClick(View v) {
 
 
-                webView.URL="";
+                webView.URL="https://sites.google.com/view/shohozboi";
                 webView.TOPTEXT="Privacy Policy";
 
 
